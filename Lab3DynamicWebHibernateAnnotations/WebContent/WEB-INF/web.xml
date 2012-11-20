@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+	id="WebApp_ID" version="3.0">
+	<display-name>Lab3DynamicWebHibernate</display-name>
+	<listener>
+		<listener-class>md.victordov.lab.ListersUtils.HibernateListener</listener-class>
+	</listener>
+	<servlet>
+		<servlet-name>CursServlet</servlet-name>
+		<servlet-class>md.victordov.lab.Servlets.CursServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>ErrorHandler</servlet-name>
+		<servlet-class>md.victordov.lab.Errors.ErrorHandler</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ErrorHandler</servlet-name>
+		<url-pattern>/ErrorHandler</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>CursServlet</servlet-name>
+		<url-pattern>/Curs/cursServ.jsp</url-pattern>
+	</servlet-mapping>
+	<error-page>
+		<error-code>404</error-code>
+		<location>/ErrorHandler</location>
+	</error-page>
+		<error-page>
+		<error-code>500</error-code>
+		<location>/ErrorHandler</location>
+	</error-page>
+	<error-page>
+		<exception-type>java.lang.Throwable</exception-type>
+		<location>/ErrorHandler</location>
+	</error-page>
+</web-app>
