@@ -3,8 +3,8 @@
 <%@ page import="md.*"%>
 <%@ page import="md.victordov.lab.vo.*"%>
 <%@ page import="md.victordov.lab.dao.CursDAO"%>
-<%@ page import="md.victordov.lab.vo.Curs"%>
 <%@ page import="md.victordov.lab.vo.Universitate"%>
+<%@ page import="md.victordov.lab.vo.Curs"%>
 <%@ page import="md.victordov.lab.vo.Profesor"%>
 <%@ page import="java.io.PrintWriter"%>
 <%@ page import="java.util.List"%>
@@ -20,34 +20,31 @@
 
 	<!-- Header -->
 	<%@ include file="/headerJSP.jsp"%>
+	<%
+		if ("POST".equalsIgnoreCase(request.getMethod())
+				&& (request.getParameter("id") != null)) {
+	%>
 	<div id="wrapper">
 		<form method="post" action="editCurs.jsp">
 			<%
 				GenericDAO<Curs> genDao = new CursDAO();
-				Curs curs = new Curs();
-				String id = "0";
-				try {
-					id = request.getParameter("id");
-				} catch (NumberFormatException e) {
-					id = "0";
-				}
+					Curs curs = new Curs();
+					Integer idC = 0;
+					try {
+						idC = Integer.parseInt(request.getParameter("id"));
+					} catch (NumberFormatException e) {
+					}
 
-				Integer no = 0;
-				try {
-					no = Integer.parseInt(id);
-				} catch (NumberFormatException e) {
-					no = 0;
-				}
-				curs = genDao.retrieve(no);
+					curs = genDao.retrieve(idC);
 			%>
 			<br /> <br />
 			<table>
 				<caption>Curs Edit</caption>
 				<thead>
 					<tr>
-						<th>Nume</th>
-						<th>Prenume</th>
-						<th>Adresa</th>
+						<th>Nume Curs</th>
+						<th>Universiate Id</th>
+						<th>Profesor Id</th>
 					</tr>
 				</thead>
 				<tr>
@@ -57,7 +54,7 @@
 						value="<%=curs.getUniversitate().getUId()%>"></td>
 					<td><input type="text" name="ProfID"
 						value="<%=curs.getProfesor().getPId()%>"></td>
-					<td><input type="hidden" name="id" value="<%=no%>"></td>
+					<td><input type="hidden" name="id" value="<%=idC%>"></td>
 				</tr>
 				<tr>
 					<td><input type="submit" name="Submit" value="Update"
@@ -70,32 +67,34 @@
 	<!-- Edit form function -->
 	<%
 		if ("POST".equalsIgnoreCase(request.getMethod())
-				&& request.getParameter("id") != null
-				&& (request.getParameter("Nume") != null)
-				&& (request.getParameter("UniverID") != null)
-				&& (request.getParameter("ProfID") != null)) {
-			String idCursString = request.getParameter("id");
-			Integer idCurs = Integer.parseInt(idCursString);
+					&& (request.getParameter("id") != null)
+					&& (request.getParameter("Nume") != null)
+					&& (request.getParameter("UniverID") != null)
+					&& (request.getParameter("ProfID") != null)) {
+				String idCursString = request.getParameter("id");
+				Integer idCurs = Integer.parseInt(idCursString);
 
-			String numeCurs = request.getParameter("Nume");
-			Integer univerID = Integer.parseInt(request
-					.getParameter("UniverID"));
-			Integer profID = Integer.parseInt(request
-					.getParameter("ProfID"));
+				String numeCurs = request.getParameter("Nume");
+				Integer univerID = Integer.parseInt(request
+						.getParameter("UniverID"));
+				Integer profID = Integer.parseInt(request
+						.getParameter("ProfID"));
 
-			Universitate tempUniv = new Universitate();
-			tempUniv.setUId(univerID);
-			Profesor tempProf = new Profesor();
-			tempProf.setPId(profID);
-			curs.setCId(idCurs);
-			curs.setNumeCurs(numeCurs);
-			curs.setUniversitate(tempUniv);
-			curs.setProfesor(tempProf);
-			genDao.update(curs);
+				Universitate universitate = new Universitate();
+				universitate.setUId(univerID);
 
+				Profesor profesor = new Profesor();
+				profesor.setPId(profID);
+
+				curs.setCId(idCurs);
+				curs.setNumeCurs(numeCurs);
+				curs.setUniversitate(universitate);
+				curs.setProfesor(profesor);
+				genDao.update(curs);
+			}
 		}
 	%>
-	<a href="<%=request.getContextPath()%>/Curs/CursJSP.jsp">Apasa
-		aici: Curs</a>
+	<a href="<%=request.getContextPath()%>/Curs/CursJSP.jsp">Click
+		here: Curs</a>
 	<!-- Footer -->
 	<%@ include file="/footerJSP.jsp"%>

@@ -14,16 +14,22 @@
 <title>Student Edit</title>
 </head>
 <body>
-
 	<%@ include file="/headerJSP.jsp"%>
+	<!-- In case that the page is accessed directly from browser bar -->
+	<!-- it will display a blank line-->
+	<%
+		if ("POST".equalsIgnoreCase(request.getMethod())
+				&& (request.getParameter("id") != null)) {
+	%>
+
+
 	<form method="post" action="editStudent.jsp">
 		<%
 			GenericDAO<Student> genDao = new StudentDAO();
-
-			Student stud = new Student();
-			String id = request.getParameter("id");
-			Integer no = Integer.parseInt(id);
-			stud = genDao.retrieve(no);
+				Student stud = new Student();
+				String id = request.getParameter("id");
+				Integer no = Integer.parseInt(id);
+				stud = genDao.retrieve(no);
 		%>
 		<br /> <br />
 		<table>
@@ -55,38 +61,39 @@
 		</table>
 	</form>
 
-	<!-- Update Funtion -->
+	<!-- Update Function -->
 	<%
 		if ("POST".equalsIgnoreCase(request.getMethod())
-				&& (request.getParameter("id") != null)
-				&& (request.getParameter("Nume") != null)
-				&& (request.getParameter("Prenume") != null)
-				&& (request.getParameter("Grupa") != null)
-				&& (request.getParameter("Email") != null)
-				&& (request.getParameter("Telefon") != null)) {
+					&& (request.getParameter("id") != null)
+					&& (request.getParameter("Nume") != null)
+					&& (request.getParameter("Prenume") != null)
+					&& (request.getParameter("Grupa") != null)
+					&& (request.getParameter("Email") != null)
+					&& (request.getParameter("Telefon") != null)) {
 
-			String idStudentString = request.getParameter("id");
-			Integer idStudent = Integer.parseInt(idStudentString);
-			String numeStudent = request.getParameter("Nume");
-			String prenumeStudent = request.getParameter("Prenume");
-			String grupaStudent = request.getParameter("Grupa");
-			String emailStudent = request.getParameter("Email");
-			String telefonStudent = request.getParameter("Telefon");
+				String idStudentString = request.getParameter("id");
+				Integer idStudent = Integer.parseInt(idStudentString);
+				String numeStudent = request.getParameter("Nume");
+				String prenumeStudent = request.getParameter("Prenume");
+				String grupaStudent = request.getParameter("Grupa");
+				String emailStudent = request.getParameter("Email");
+				String telefonStudent = request.getParameter("Telefon");
+				stud.setSId(idStudent);
 
-			stud.setSId(idStudent);
-			stud.setNume(numeStudent);
-			stud.setPrenume(prenumeStudent);
-			stud.setGrupa(grupaStudent);
-			stud.setEmail(emailStudent);
-			stud.setTelFix(telefonStudent);
-			genDao.update(stud);
+				stud.setNume(numeStudent);
+				stud.setPrenume(prenumeStudent);
+				stud.setGrupa(grupaStudent);
+				stud.setEmail(emailStudent);
+				stud.setTelFix(telefonStudent);
+				genDao.update(stud);
 
+			}
+	%>
+	<%
 		}
 	%>
-
-
-	<a href="<%=request.getContextPath()%>/Student/StudentJSP.jsp">Apasa
-		aici: <strong>Student</strong>
+	Click here:
+	<a href="<%=request.getContextPath()%>/Student/StudentJSP.jsp"><strong>Student</strong>
 	</a>
 
 	<!-- Footer -->

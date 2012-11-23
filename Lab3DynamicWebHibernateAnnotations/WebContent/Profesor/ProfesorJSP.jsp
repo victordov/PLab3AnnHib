@@ -4,6 +4,9 @@
 <%@ page import="md.victordov.lab.vo.*"%>
 <%@ page import="md.victordov.lab.dao.ProfesorDAO"%>
 <%@ page import="md.victordov.lab.vo.Profesor"%>
+<%@ page import="md.victordov.lab.vo.Curs"%>
+<%@ page import="md.victordov.lab.vo.Universitate"%>
+<%@ page import="md.victordov.lab.vo.StudCurs"%>
 <%@ page import="java.io.PrintWriter"%>
 <%@ page import="java.util.List"%>
 <%@ page import="md.victordov.lab.dao.*"%>
@@ -54,7 +57,6 @@ function deleteRecord(id){
 	%>
 	<br />
 	<br />
-	<br />
 	<form method="post" name="form">
 		<table id="data">
 			<caption>Profesor</caption>
@@ -72,7 +74,6 @@ function deleteRecord(id){
 			<%
 				int profListSize = 0;
 				profListSize = genDao.countSize().intValue();
-				int countID = 0;
 				int ox = (pageNr * pageSize) - pageSize;
 				for (int i = 0; (i < pageSize) && (i < profList.size()); i++) {
 			%>
@@ -111,11 +112,11 @@ function deleteRecord(id){
 						/ (double) pageSize);
 				for (int i = 1; i <= pageFor; i++) {
 					if (i == pageNr) {
-						out.println("<td><b><a href=\"" + request.getContextPath()
+						out.println("<td id=\"pageCss\"><b><a href=\"" + request.getContextPath()
 								+ "/Profesor/ProfesorJSP.jsp?pageNr=" + i + "\">"
 								+ i + "</a></b></td>");
 					} else {
-						out.println("<td><a href=\"" + request.getContextPath()
+						out.println("<td id=\"pageCss\"><a href=\"" + request.getContextPath()
 								+ "/Profesor/ProfesorJSP.jsp?pageNr=" + i + "\">"
 								+ i + "</a></td>");
 					}

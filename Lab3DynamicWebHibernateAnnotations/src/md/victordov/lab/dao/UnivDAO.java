@@ -3,7 +3,7 @@ package md.victordov.lab.dao;
 import java.io.Serializable;
 import java.util.List;
 
-import md.victordov.lab.ListersUtils.HibernateUtil;
+import md.victordov.lab.common.HibernateUtil;
 import md.victordov.lab.common.exception.ErrorList;
 import md.victordov.lab.common.exception.MyDaoException;
 import md.victordov.lab.vo.Universitate;

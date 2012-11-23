@@ -16,13 +16,19 @@
 </head>
 <body>
 	<%@ include file="/headerJSP.jsp"%>
+	<br />
+	<br />
+	<%
+		if ("POST".equalsIgnoreCase(request.getMethod())
+				&& (request.getParameter("idUniversitate") != null)) {
+	%>
 	<form method="post" action="editUniv.jsp">
 		<%
 			GenericDAO<Universitate> genDao = new UnivDAO();
-			Universitate univ = new Universitate();
-			String id = request.getParameter("idUniversitate");
-			Integer no = Integer.parseInt(id);
-			univ = genDao.retrieve(no);
+				Universitate univ = new Universitate();
+				String id = request.getParameter("idUniversitate");
+				Integer no = Integer.parseInt(id);
+				univ = genDao.retrieve(no);
 		%>
 		<table>
 			<tr>
@@ -49,27 +55,29 @@
 
 	<%
 		if ("POST".equalsIgnoreCase(request.getMethod())
-				&& request.getParameter("idUniversitate") != null
-				&& (request.getParameter("Denumire") != null)
-				&& (request.getParameter("Adresa") != null)
-				&& (request.getParameter("Telefon") != null)) {
-			String idUniverString = request.getParameter("idUniversitate");
-			Integer idUniversitate = Integer.parseInt(idUniverString);
+					&& request.getParameter("idUniversitate") != null
+					&& (request.getParameter("Denumire") != null)
+					&& (request.getParameter("Adresa") != null)
+					&& (request.getParameter("Telefon") != null)) {
+				String idUniverString = request
+						.getParameter("idUniversitate");
+				Integer idUniversitate = Integer.parseInt(idUniverString);
 
-			String denumUniver = request.getParameter("Denumire");
-			String adresaUniver = request.getParameter("Adresa");
-			String telefonUniver = request.getParameter("Telefon");
+				String denumUniver = request.getParameter("Denumire");
+				String adresaUniver = request.getParameter("Adresa");
+				String telefonUniver = request.getParameter("Telefon");
 
-			univ.setUId(idUniversitate);
-			univ.setNumeUniver(denumUniver);
-			univ.setAdresa(adresaUniver);
-			univ.setTelefon(telefonUniver);
-			genDao.update(univ);
+				univ.setUId(idUniversitate);
+				univ.setNumeUniver(denumUniver);
+				univ.setAdresa(adresaUniver);
+				univ.setTelefon(telefonUniver);
+				genDao.update(univ);
+			}
 		}
 	%>
 
-	<a href="<%=request.getContextPath()%>/Universitate/UnivJSP.jsp">Apasa
-		aici: <strong>Universitate</strong>
+	<a href="<%=request.getContextPath()%>/Universitate/UnivJSP.jsp">Click
+		here: <strong>Universitate</strong>
 	</a>
 
 	<%@ include file="/footerJSP.jsp"%>

@@ -6,37 +6,40 @@
 <%@ page import="md.victordov.lab.vo.Universitate"%>
 <%@ page import="java.io.PrintWriter"%>
 <%@ page import="java.util.List"%>
-<%@ page import="md.victordov.lab.dao.*" %>
+<%@ page import="md.victordov.lab.dao.*"%>
 <html>
 <head>
 <link href="<%=request.getContextPath()%>/style.css" rel="stylesheet"
 	type="text/css">
-<title>Universitate Insert</title>
+<title>University Insert</title>
 </head>
 <body>
-<!-- Header -->
+	<!-- Header -->
 	<%@ include file="/headerJSP.jsp"%>
-	<form method="post" action="<%=request.getContextPath() %>/Universitate/insertUnivForm.jsp">
+	<br />
+	<br />
+	<form method="post"
+		action="<%=request.getContextPath()%>/Universitate/insertUnivForm.jsp">
 		<%
-		GenericDAO<Universitate> genDao = new UnivDAO();
+			GenericDAO<Universitate> genDao = new UnivDAO();
 			Universitate univ = new Universitate();
-			List<Universitate> listUniv ;
+			List<Universitate> listUniv;
 			listUniv = genDao.retrieve();
 		%>
 		<table>
 			<caption>Insert Universitate</caption>
 			<tr>
-				<th>ID</th>
 				<th>Denumire</th>
 				<th>Adresa</th>
 				<th>Telefon</th>
 			</tr>
 			<tr>
-				<td><input type="text" name="idUniversitate"
-					value="<%=genDao.retrieve().size() + 1%>"></td>
-				<td><input type="text" placeholder="Denumire" name="Denumire" value=""></td>
-				<td><input type="text" placeholder="Adresa" name="Adresa" value=""></td>
-				<td><input type="text" placeholder="Telefon"name="Telefon" value=""></td>
+				<td><input type="text" placeholder="Denumire" name="Denumire"
+					value=""></td>
+				<td><input type="text" placeholder="Adresa" name="Adresa"
+					value=""></td>
+				<td><input type="text" placeholder="Telefon" name="Telefon"
+					value=""></td>
 
 			</tr>
 			<tr>
@@ -50,14 +53,14 @@
 
 	<%
 		if ("POST".equalsIgnoreCase(request.getMethod())
-				&& request.getParameter("idUniversitate") != null) {
-			String idUniverString = request.getParameter("idUniversitate");
-			Integer idUniversitate = Integer.parseInt(idUniverString);
+				&& (request.getParameter("Denumire") != null)
+				&& (request.getParameter("Adresa") != null)
+				&& (request.getParameter("Telefon") != null)) {
 
 			String denumUniver = request.getParameter("Denumire");
 			String adresaUniver = request.getParameter("Adresa");
 			String telefonUniver = request.getParameter("Telefon");
-			univ.setUId(idUniversitate);
+
 			univ.setNumeUniver(denumUniver);
 			univ.setAdresa(adresaUniver);
 			univ.setTelefon(telefonUniver);

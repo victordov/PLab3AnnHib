@@ -12,7 +12,7 @@
 <head>
 <link href="<%=request.getContextPath()%>/style.css" rel="stylesheet"
 	type="text/css">
-<title>Home Page</title>
+<title>University delete</title>
 </head>
 <body>
 

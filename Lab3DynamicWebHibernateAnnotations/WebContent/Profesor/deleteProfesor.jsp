@@ -6,8 +6,8 @@
 <%@ page import="md.victordov.lab.vo.Profesor"%>
 <%@ page import="java.io.PrintWriter"%>
 <%@ page import="java.util.ArrayList"%>
-<%@ page import="md.victordov.lab.dao.ProfesorDAO" %>
-<%@ page import="md.victordov.lab.dao.GenericDAO" %>
+<%@ page import="md.victordov.lab.dao.ProfesorDAO"%>
+<%@ page import="md.victordov.lab.dao.GenericDAO"%>
 
 <html>
 <head>
@@ -26,10 +26,9 @@
 		String idProfesorString = request.getParameter("id");
 		Integer idProfesor = Integer.parseInt(idProfesorString);
 		genDao.delete(idProfesor);
-		
 	%>
-	<p>Profesorul fost sters</p>
+	<p>Profesor record was deleted</p>
 
-	<a href="<%=request.getContextPath()%>/Profesor/ProfesorJSP.jsp">Apasa
-		aici: <strong>Profesor</strong>
+	Click here to return:
+	<a href="<%=request.getContextPath()%>/Profesor/ProfesorJSP.jsp"><strong>Profesor</strong>
 	</a>

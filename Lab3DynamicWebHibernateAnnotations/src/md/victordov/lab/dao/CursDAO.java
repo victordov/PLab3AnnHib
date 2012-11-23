@@ -8,7 +8,7 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-import md.victordov.lab.ListersUtils.HibernateUtil;
+import md.victordov.lab.common.HibernateUtil;
 import md.victordov.lab.common.exception.ErrorList;
 import md.victordov.lab.common.exception.MyDaoException;
 import md.victordov.lab.vo.Curs;
@@ -67,6 +67,8 @@ public class CursDAO implements Serializable, GenericDAO<Curs> {
 			System.out.println("get failed");
 			re.printStackTrace();
 			throw re;
+		} finally {
+			session.close();
 		}
 
 	}
@@ -159,9 +161,8 @@ public class CursDAO implements Serializable, GenericDAO<Curs> {
 		session = HibernateUtil.getSessionFactory().openSession();
 		Transaction tx = session.beginTransaction();
 
-		Long count = ((Long) session
-				.createQuery("select count(*) from Curs").iterate()
-				.next()).longValue();
+		Long count = ((Long) session.createQuery("select count(*) from Curs")
+				.iterate().next()).longValue();
 		tx.commit();
 		return count;
 	}

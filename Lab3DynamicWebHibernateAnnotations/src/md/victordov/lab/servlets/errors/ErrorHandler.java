@@ -1,4 +1,4 @@
-package md.victordov.lab.Errors;
+package md.victordov.lab.servlets.errors;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -57,7 +57,7 @@ public class ErrorHandler extends HttpServlet {
 		out.println("<HEAD><TITLE>" + reason + ": " + message
 				+ "</TITLE></HEAD>");
 		out.println("<BODY>");
-		out.println("<H1>Type of error||| " + reason + " |||</H1>");
+		out.println("<H1>" + reason + "</H1>");
 		//out.println("<H2>" + message + "</H2>");
 		out.println("<H2>");
 		for(int i=0; i<message.length(); i++){

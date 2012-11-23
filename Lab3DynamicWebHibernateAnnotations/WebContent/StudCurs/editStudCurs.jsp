@@ -4,6 +4,8 @@
 <%@ page import="md.victordov.lab.vo.*"%>
 <%@ page import="md.victordov.lab.dao.StudCursDAO"%>
 <%@ page import="md.victordov.lab.vo.StudCurs"%>
+<%@ page import="md.victordov.lab.vo.Student"%>
+<%@ page import="md.victordov.lab.vo.Curs"%>
 <%@ page import="java.io.PrintWriter"%>
 <%@ page import="java.util.ArrayList"%>
 <%@ page import="md.victordov.lab.dao.*"%>
@@ -19,7 +21,6 @@
 	<form method="post" action="editStudCurs.jsp">
 		<%
 			GenericDAO<StudCurs> genDao = new StudCursDAO();
-
 			StudCurs studCursObject = new StudCurs();
 			String id = request.getParameter("id");
 			Integer no = Integer.parseInt(id);
@@ -29,7 +30,6 @@
 		<table>
 			<caption>StudCurs Edit</caption>
 			<tr>
-
 				<th>Student ID</th>
 				<th>Curs ID</th>
 			</tr>
@@ -64,15 +64,15 @@
 			String cursIdString = request.getParameter("CursID");
 			Integer cursId = Integer.parseInt(cursIdString);
 
-			Student tempStud = new Student();
-			tempStud.setSId(studId);
+			Student student = new Student();
+			student.setSId(studId);
 
-			Curs tempCurs = new Curs();
-			tempCurs.setCId(cursId);
+			Curs curs = new Curs();
+			curs.setCId(cursId);
 
 			studCursObject.setScId(idStudCurs);
-			studCursObject.setStudent(tempStud);
-			studCursObject.setCurs(tempCurs);
+			studCursObject.setStudent(student);
+			studCursObject.setCurs(curs);
 			genDao.update(studCursObject);
 		}
 	%>

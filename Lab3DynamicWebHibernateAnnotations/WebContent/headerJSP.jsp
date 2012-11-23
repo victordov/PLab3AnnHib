@@ -1,5 +1,6 @@
 <div id="header">
-	<table>
+	<table width="100%" id="as" border="0" cellpadding="0" cellspacing="0"
+		width="100%" bgcolor="#D90046">
 		<tr>
 			<td width="15%">
 				<p align="center">

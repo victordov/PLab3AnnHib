@@ -8,7 +8,7 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-import md.victordov.lab.ListersUtils.HibernateUtil;
+import md.victordov.lab.common.HibernateUtil;
 import md.victordov.lab.common.exception.ErrorList;
 import md.victordov.lab.common.exception.MyDaoException;
 import md.victordov.lab.vo.Universitate;

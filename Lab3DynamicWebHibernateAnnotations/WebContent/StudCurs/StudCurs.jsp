@@ -40,8 +40,6 @@ function deleteRecord(id){
 </script>
 
 	<%
-		//response.sendRedirect("error.jsp?msg="+ e.message());
-
 		int pageNr = 1;
 		int pageSize = 2;
 		try {
@@ -114,12 +112,20 @@ function deleteRecord(id){
 				int pageFor = (int) Math.ceil((double) studCursListSize
 						/ (double) pageSize);
 				for (int i = 1; i <= pageFor; i++) {
+					if (i % 20 == 0) {
+						out.println("<tr>");
+					}
+					if (i % 40 == 0) {
+						out.println("</tr>");
+					}
 					if (i == pageNr) {
-						out.println("<td><b><a href=\"" + request.getContextPath()
+						out.println("<td id=\"pageCss\"><b><a href=\""
+								+ request.getContextPath()
 								+ "/StudCurs/StudCurs.jsp?pageNr=" + i + "\">" + i
 								+ "</a></b></td>");
 					} else {
-						out.println("<td><a href=\"" + request.getContextPath()
+						out.println("<td id=\"pageCss\"><a href=\""
+								+ request.getContextPath()
 								+ "/StudCurs/StudCurs.jsp?pageNr=" + i + "\">" + i
 								+ "</a></td>");
 					}

@@ -1,5 +1,6 @@
 @CHARSET "ISO-8859-1";
-table{
+
+table {
 	background-color: grey;
 	font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
 	font-size: 14px;
@@ -15,57 +16,71 @@ table{
 	border-left-style: solid;
 	margin-right: auto;
 	margin-left: auto;
-	
-	}
+}
+
 a {
-	text-decoration: overline;
 	font-size: large;
-	
+	text-decoration: none;
 }
-a:HOVER{
-	color: white;
+
+a:HOVER {
+	color: lime;
 	font-weight: normal;
+	font-style: normal;
 }
+
 caption {
 	background-color: gray;
 	font-size: large;
-	
 }
 
 body {
-   margin:0;
-   padding:0;
-   height:100%;
+	margin: 0;
+	padding: 0;
+	height: 100%;
 }
+
 #container {
-   min-height:100%;
-   position:relative;
+	min-height: 100%;
+	position: relative;
 }
 
 #header {
-   background:gray;
-   padding:9px;
-   A:link{COLOR:red;};
-   
+	background: gray;
+	padding: 9px;
 }
 
+;
+}
 #footer {
-  	position: relative; 
-    bottom:0; 
-    height: 60px; 
-    width:100%;
-   
-   
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+	height: 60px; /* Height of the footer */
+	background: #6cf;
 }
-#tableFooter{
-	width:100%;
-	height:60px;
-	background:gray;
+
+#tableFooter {
+	width: 100%;
+	height: 60px;
+	background: gray;
 }
-#pageCss{
-	font-style: oblique;
+
+#pageCss {
+	font-style: normal;
 	padding: 6 px;
+	text-decoration: none;
 }
-#data{
+
+#data {
 	background-color: white;
+}
+
+#centerBody {
+	margin-left: auto;
+	margin-right: auto;
+	width: 70%;
+	background-color: #eff0e2;
+	padding: 80px;
+	border: 1px solid #ccc;
 }

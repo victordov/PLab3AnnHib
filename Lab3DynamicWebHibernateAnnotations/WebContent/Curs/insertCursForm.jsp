@@ -7,7 +7,6 @@
 <%@ page import="java.io.PrintWriter"%>
 <%@ page import="java.util.List"%>
 <%@ page import="md.victordov.lab.dao.*"%>
-<%@ page import="md.victordov.lab.vo.Universitate"%>
 <html>
 <html>
 <head>
@@ -19,6 +18,8 @@
 
 	<!-- Header -->
 	<%@ include file="/headerJSP.jsp"%>
+	<br />
+	<br />
 
 	<form method="post" action="insertCursForm.jsp">
 		<%
@@ -30,17 +31,14 @@
 		<table>
 			<caption>Curs Insert</caption>
 			<tr>
-				<th>ID</th>
 				<th>Nume</th>
 				<th>Univer ID</th>
 				<th>Prof ID</th>
 			</tr>
 			<tr>
-				<td><input type="text" name="id"
-					value="<%=genDao.retrieve().size() + 1%>"></td>
-				<td><input type="text" name="Nume" value=""></td>
-				<td><input type="text" name="UniverID" value=""></td>
-				<td><input type="text" name="ProfID" value=""></td>
+				<td><input type="text" name="Nume" value="" placeholder="Nume"></td>
+				<td><input type="text" name="UniverID" value="" placeholder="Univer Id"></td>
+				<td><input type="text" name="ProfID" value="" placeholder="Profesor Id"></td>
 			</tr>
 			<tr>
 				<td><input type="submit" name="Submit" value="Insert"
@@ -53,30 +51,30 @@
 	<!-- Edit form function -->
 	<%
 		if ("POST".equalsIgnoreCase(request.getMethod())
-				&& request.getParameter("id") != null
-				&& (request.getParameter("Nume") != null)
+
+		&& (request.getParameter("Nume") != null)
 				&& (request.getParameter("UniverID") != null)
 				&& (request.getParameter("ProfID") != null)) {
-			String idCursString = request.getParameter("id");
-			Integer idCurs = Integer.parseInt(idCursString);
 
 			String numeCurs = request.getParameter("Nume");
 			Integer univerID = Integer.parseInt(request
 					.getParameter("UniverID"));
 			Integer profID = Integer.parseInt(request
 					.getParameter("ProfID"));
-			Universitate tempUniv = new Universitate();
-			tempUniv.setUId(univerID);
-			Profesor tempProf = new Profesor();
-			tempProf.setPId(profID);
-			curs.setCId(idCurs);
+
+			Universitate universitate = new Universitate();
+			universitate.setUId(univerID);
+
+			Profesor profesor = new Profesor();
+			profesor.setPId(profID);
+
 			curs.setNumeCurs(numeCurs);
-			curs.setUniversitate(tempUniv);
-			curs.setProfesor(tempProf);
+			curs.setUniversitate(universitate);
+			curs.setProfesor(profesor);
 			genDao.create(curs);
 		}
 	%>
-	<a href="<%=request.getContextPath()%>/Curs/CursJSP.jsp">Apasa
-		aici: Curs</a>
+	<a href="<%=request.getContextPath()%>/Curs/CursJSP.jsp">Click
+		here: Curs</a>
 	<!-- Footer -->
 	<%@ include file="/footerJSP.jsp"%>

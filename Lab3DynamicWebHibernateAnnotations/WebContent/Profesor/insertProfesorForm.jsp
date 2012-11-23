@@ -18,7 +18,8 @@
 
 	<!-- Header -->
 	<%@ include file="/headerJSP.jsp"%>
-
+	<br />
+	<br />
 	<form method="post" action="insertProfesorForm.jsp">
 		<%
 			GenericDAO<Profesor> genDao = new ProfesorDAO();
@@ -29,42 +30,33 @@
 		<table>
 			<caption>Profesor Insert</caption>
 			<tr>
-				<th>ID</th>
 				<th>Nume</th>
 				<th>Prenume</th>
 				<th>Adresa</th>
 			</tr>
 			<tr>
-				<td><input type="text" name="id"
-					value="<%=genDao.retrieve().size() + 1%>"></td>
-				<td><input type="text" placeholder="Nume" name="Nume" value=""></td>
-				<td><input type="text" placeholder="Prenume" name="Prenume" value=""></td>
-				<td><input type="text" placeholder="Adresa" name="Adresa" value=""></td>
+				<td><input type="text" name="Nume" value=""></td>
+				<td><input type="text" name="Prenume" value=""></td>
+				<td><input type="text" name="Adresa" value=""></td>
 			</tr>
 			<tr>
 				<td><input type="submit" name="Submit" value="Insert"
 					style="background-color: #49743D; font-weight: bold; color: #ffffff;"></td>
 			</tr>
-
 		</table>
 	</form>
 
 	<!-- Insert form funcition -->
 	<%
 		if ("POST".equalsIgnoreCase(request.getMethod())
-				&& request.getParameter("id") != null
 				&& (request.getParameter("Nume") != null)
 				&& (request.getParameter("Prenume") != null)
 				&& (request.getParameter("Adresa") != null)) {
-
-			String idProfesorString = request.getParameter("id");
-			Integer idProfesor = Integer.parseInt(idProfesorString);
 
 			String numeProfesor = request.getParameter("Nume");
 			String prenumeProfesor = request.getParameter("Prenume");
 			String adresaProfesor = request.getParameter("Adresa");
 
-			prof.setPId(idProfesor);
 			prof.setNume(numeProfesor);
 			prof.setPrenume(prenumeProfesor);
 			prof.setAdresa(adresaProfesor);
@@ -72,8 +64,8 @@
 
 		}
 	%>
-	<a href="<%=request.getContextPath()%>/Profesor/ProfesorJSP.jsp">Apasa
-		aici: <strong>Profesor</strong>
+	Apasa aici:
+	<a href="<%=request.getContextPath()%>/Profesor/ProfesorJSP.jsp"><strong>Profesor</strong>
 	</a>
 
 	<!-- Footer -->

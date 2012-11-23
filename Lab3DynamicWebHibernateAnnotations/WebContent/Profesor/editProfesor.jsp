@@ -17,25 +17,19 @@
 
 	<!-- Header -->
 	<%@ include file="/headerJSP.jsp"%>
+	<%if ("POST".equalsIgnoreCase(request.getMethod())
+			&& (request.getParameter("id") != null)){ %>
 	<div id="wrapper">
 		<form method="post" action="editProfesor.jsp">
 			<%
 				GenericDAO<Profesor> genDao = new ProfesorDAO();
 				Profesor prof = new Profesor();
-				String id = "0";
+				Integer id = 0;
 				try {
-					id = request.getParameter("id");
+					id = Integer.parseInt(request.getParameter("id"));
 				} catch (NumberFormatException e) {
-					id = "0";
 				}
-
-				Integer no = 0;
-				try {
-					no = Integer.parseInt(id);
-				} catch (NumberFormatException e) {
-					no = 0;
-				}
-				prof = genDao.retrieve(no);
+				prof = genDao.retrieve(id);
 			%>
 			<br /> <br />
 			<table>
@@ -51,7 +45,7 @@
 						value="<%=prof.getPrenume()%>"></td>
 					<td><input type="text" name="Adresa"
 						value="<%=prof.getAdresa()%>"></td>
-					<td><input type="hidden" name="id" value="<%=no%>"></td>
+					<td><input type="hidden" name="id" value="<%=id%>"></td>
 				</tr>
 				<tr>
 					<td><input type="submit" name="Submit" value="Update"
@@ -83,6 +77,7 @@
 			genDao.update(prof);
 
 		}
+	}
 	%>
 	<a href="<%=request.getContextPath()%>/Profesor/ProfesorJSP.jsp">Apasa
 		aici: <strong>Profesor</strong>

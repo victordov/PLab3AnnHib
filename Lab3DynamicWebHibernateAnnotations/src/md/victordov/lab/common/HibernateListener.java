@@ -1,4 +1,4 @@
-package md.victordov.lab.ListersUtils;
+package md.victordov.lab.common;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;

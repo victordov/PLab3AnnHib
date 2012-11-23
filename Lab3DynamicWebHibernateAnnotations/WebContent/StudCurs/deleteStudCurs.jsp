@@ -17,7 +17,6 @@
 <body>
 	<!-- Header -->
 	<%@ include file="/headerJSP.jsp"%>
-
 	<%
 		GenericDAO<StudCurs> genDao = new StudCursDAO();
 
@@ -26,11 +25,7 @@
 		Integer idStudCurs = Integer.parseInt(idStudCursString);
 		genDao.delete(idStudCurs);
 	%>
-
-	<a href="<%=request.getContextPath()%>/StudCurs/StudCurs.jsp">Apasa
-		aici: <strong>StudCurs Curs</strong>
-	</a>
-
+	<a href="<%=request.getContextPath()%>/StudCurs/StudCurs.jsp">Click here: <strong>StudCurs Curs</strong></a>
 
 	<!-- Footer -->
 	<%@ include file="/footerJSP.jsp"%>

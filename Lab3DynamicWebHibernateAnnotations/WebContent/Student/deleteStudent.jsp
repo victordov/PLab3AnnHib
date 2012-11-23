@@ -12,23 +12,20 @@
 <head>
 <link href="<%=request.getContextPath()%>/style.css" rel="stylesheet"
 	type="text/css">
-<title>Profesor Delete</title>
+<title>Student Delete</title>
 </head>
 <body>
 
 	<%
 		GenericDAO<Student> genDao = new StudentDAO();
-
 		Student stud = new Student();
 		String idStudentString = request.getParameter("id");
 		Integer idStudent = Integer.parseInt(idStudentString);
 		genDao.delete(idStudent);
 	%>
-
-	<a href="<%=request.getContextPath()%>/Student/StudentJSP.jsp">Apasa
-		aici: <strong>Student</strong>
-	</a>
-
+	Click Here:
+	<a href="<%=request.getContextPath()%>/Student/StudentJSP.jsp"><strong>Student
+			Menu</strong> </a>
 
 	<!-- Footer -->
 	<%@ include file="/footerJSP.jsp"%>

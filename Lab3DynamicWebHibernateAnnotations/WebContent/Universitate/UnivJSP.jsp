@@ -4,6 +4,9 @@
 <%@ page import="md.victordov.lab.vo.*"%>
 <%@ page import="md.victordov.lab.dao.UnivDAO"%>
 <%@ page import="md.victordov.lab.vo.Universitate"%>
+<%@ page import="md.victordov.lab.vo.Curs"%>
+<%@ page import="md.victordov.lab.vo.StudCurs"%>
+<%@ page import="md.victordov.lab.vo.Student"%>
 <%@ page import="java.io.PrintWriter"%>
 <%@ page import="java.util.List"%>
 <%@ page import="md.victordov.lab.dao.*"%>
@@ -11,7 +14,7 @@
 <head>
 <link href="<%=request.getContextPath()%>/style.css" rel="stylesheet"
 	type="text/css">
-<title>Universitate</title>
+<title>University</title>
 </head>
 <body>
 	<!-- Header -->
@@ -52,8 +55,6 @@ function deleteRecord(idUniversitate){
 	%>
 	<br />
 	<br />
-	<br />
-	<br />
 	<form method="post" name="form">
 		<table id="data">
 			<caption>Universitate</caption>
@@ -72,7 +73,6 @@ function deleteRecord(idUniversitate){
 				int univListSize = 0;
 				univListSize = genDao.countSize().intValue();
 				int ox = (pageNr * pageSize) - pageSize;
-				int countID = 0;
 				for (int i = 0; (i < pageSize) && (i < univList.size()); i++) {
 			%>
 			<tr>
@@ -108,11 +108,13 @@ function deleteRecord(idUniversitate){
 						/ (double) pageSize);
 				for (int i = 1; i <= pageFor; i++) {
 					if (i == pageNr) {
-						out.println("<td><b><a href=\"" + request.getContextPath()
+						out.println("<td id=\"pageCss\"><b><a href=\""
+								+ request.getContextPath()
 								+ "/Universitate/UnivJSP.jsp?pageNr=" + i + "\">"
 								+ i + "</a></b></td>");
 					} else {
-						out.println("<td><a href=\"" + request.getContextPath()
+						out.println("<td id=\"pageCss\"><a href=\""
+								+ request.getContextPath()
 								+ "/Universitate/UnivJSP.jsp?pageNr=" + i + "\">"
 								+ i + "</a></td>");
 					}
@@ -122,6 +124,4 @@ function deleteRecord(idUniversitate){
 		</tr>
 	</table>
 	<br />
-
-
 	<%@ include file="/footerJSP.jsp"%>

@@ -6,9 +6,8 @@
 <%@ page import="md.victordov.lab.vo.Universitate"%>
 <%@ page import="java.io.PrintWriter"%>
 <%@ page import="java.util.List"%>
-<%@ page import="md.victordov.lab.dao.*" %>
+<%@ page import="md.victordov.lab.dao.*"%>
 <html>
-
 <html>
 <head>
 <link href="<%=request.getContextPath()%>/style.css" rel="stylesheet"
@@ -26,13 +25,12 @@
 		String idCursString = request.getParameter("id");
 		Integer idCurs = Integer.parseInt(idCursString);
 		genDao.delete(idCurs);
-
 	%>
-	<p>Curs fost sters</p>
+	<p>Curs was deleted</p>
 
-	
-	<a href="<%=request.getContextPath()%>/Curs/CursJSP.jsp">Apasa
-		aici: Curs</a>
+
+	<a href="<%=request.getContextPath()%>/Curs/CursJSP.jsp">Click
+		here: Curs</a>
 	<br />
 
 	<!-- Footer -->

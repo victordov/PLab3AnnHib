@@ -6,6 +6,8 @@
 <%@ page import="md.victordov.lab.vo.*"%>
 <%@ page import="md.victordov.lab.dao.CursDAO"%>
 <%@ page import="md.victordov.lab.vo.Universitate"%>
+<%@ page import="md.victordov.lab.vo.Profesor"%>
+<%@ page import="md.victordov.lab.vo.Curs"%>
 <%@ page import="java.io.PrintWriter"%>
 <%@ page import="java.util.List"%>
 <%@ page import="md.victordov.lab.dao.*"%>
@@ -42,8 +44,6 @@ function deleteRecord(id){
 </script>
 
 	<%
-		//response.sendRedirect("error.jsp?msg="+ e.message());
-
 		int pageNr = 1;
 		int pageSize = 2;
 		GenericDAO<Curs> genDao = null;
@@ -54,11 +54,8 @@ function deleteRecord(id){
 		} catch (Exception e) {
 			pageNr = 1;
 		}
-
 		genDao = new CursDAO();
-
 		List<Curs> cursList = null;
-
 		cursList = genDao.retrieve(pageNr, pageSize);
 	%>
 	<br />
@@ -79,7 +76,6 @@ function deleteRecord(id){
 				</tr>
 			</thead>
 			<%
-				int countID = 0;
 				int cursListSize = 0;
 				cursListSize = genDao.countSize().intValue();
 				int ox = (pageNr * pageSize) - pageSize;
@@ -130,11 +126,11 @@ function deleteRecord(id){
 								+ "/Curs/CursJSP.jsp?pageNr=" + i + "\">" + i
 								+ "</a></td>");
 					}
-
 				}
 			%>
 		</tr>
 	</table>
 	<br />
+
 	<!-- Footer -->
 	<%@ include file="/footerJSP.jsp"%>

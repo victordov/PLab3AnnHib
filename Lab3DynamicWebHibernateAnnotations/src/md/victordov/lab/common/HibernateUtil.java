@@ -1,4 +1,4 @@
-package md.victordov.lab.ListersUtils;
+package md.victordov.lab.common;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
