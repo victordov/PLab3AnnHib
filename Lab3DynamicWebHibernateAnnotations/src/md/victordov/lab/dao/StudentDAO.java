@@ -17,7 +17,11 @@ import md.victordov.lab.vo.Student;
 public class StudentDAO implements Serializable, GenericDAO<Student> {
 
 	/**
+	 * @author VictorDov
 	 * 
+	 *         DAO class Student manages the Student objects ( creates, reads
+	 *         one or all or predefined number, updates, deletes, counts the
+	 *         number of records.
 	 */
 	private static final long serialVersionUID = 1L;
 
@@ -26,10 +30,10 @@ public class StudentDAO implements Serializable, GenericDAO<Student> {
 	public List<Student> retrieve() throws MyDaoException {
 		session = HibernateUtil.getSessionFactory().openSession();
 		Transaction tx = session.beginTransaction();
-		List<Student> list = null;
+		List<Student> listStudents = null;
 		try {
-			list = (List<Student>) session.createQuery("from Student").list();
-			List<Student> allUsers = list;
+			listStudents = (List<Student>) session.createQuery("from Student")
+					.list();
 			tx.commit();
 		} catch (HibernateException he) {
 			if (tx != null)
@@ -39,7 +43,7 @@ public class StudentDAO implements Serializable, GenericDAO<Student> {
 			session.close();
 		}
 
-		return list;
+		return listStudents;
 
 	}
 

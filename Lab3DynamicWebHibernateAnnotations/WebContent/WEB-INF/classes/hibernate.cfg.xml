@@ -26,12 +26,14 @@
 		<!-- Echo all executed SQL to stdout -->
 		<property name="show_sql">true</property>
 
+		<property name="hibernate.connection.release_mode">AFTER_TRANSACTION</property>
+
 		<!-- Drop and re-create the database schema on startup -->
 		<property name="hbm2ddl.auto">update</property>
-		<mapping class="md.victordov.lab.vo.Curs"/>
-		<mapping class="md.victordov.lab.vo.Profesor"/>
-		<mapping class="md.victordov.lab.vo.StudCurs"/>
-		<mapping class="md.victordov.lab.vo.Student"/>
-		<mapping class="md.victordov.lab.vo.Universitate"/>
+		<mapping class="md.victordov.lab.vo.Curs" />
+		<mapping class="md.victordov.lab.vo.Profesor" />
+		<mapping class="md.victordov.lab.vo.StudCurs" />
+		<mapping class="md.victordov.lab.vo.Student" />
+		<mapping class="md.victordov.lab.vo.Universitate" />
 	</session-factory>
 </hibernate-configuration>

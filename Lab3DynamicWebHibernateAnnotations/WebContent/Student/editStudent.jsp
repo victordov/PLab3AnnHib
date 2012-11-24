@@ -7,6 +7,8 @@
 <%@ page import="java.io.PrintWriter"%>
 <%@ page import="java.util.ArrayList"%>
 <%@ page import="md.victordov.lab.dao.*"%>
+<!DOCTYPE html>
+
 <html>
 <head>
 <link href="<%=request.getContextPath()%>/style.css" rel="stylesheet"
@@ -62,6 +64,7 @@
 	</form>
 
 	<!-- Update Function -->
+	<!-- Check if data received is not null and triggers the Generic DAO method to update the Student -->
 	<%
 		if ("POST".equalsIgnoreCase(request.getMethod())
 					&& (request.getParameter("id") != null)

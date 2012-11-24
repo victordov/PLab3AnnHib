@@ -29,6 +29,10 @@ a:HOVER {
 	font-style: normal;
 }
 
+a:VISITED {
+	
+}
+
 caption {
 	background-color: gray;
 	font-size: large;
@@ -50,8 +54,24 @@ body {
 	padding: 9px;
 }
 
-;
+#nav {
+	border: 1px solid #ccc;
+	border-width: 1px 0;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	text-align: center;
 }
+
+#nav li {
+	display: inline;
+}
+
+#nav a {
+	display: inline-block;
+	padding: 10px;
+}
+
 #footer {
 	position: absolute;
 	bottom: 0;
@@ -68,8 +88,10 @@ body {
 
 #pageCss {
 	font-style: normal;
-	padding: 6 px;
 	text-decoration: none;
+}
+#pageCss a:VISITED{
+	background-color: orange;
 }
 
 #data {
@@ -80,7 +102,9 @@ body {
 	margin-left: auto;
 	margin-right: auto;
 	width: 70%;
+	max-width: 700px;
 	background-color: #eff0e2;
 	padding: 80px;
 	border: 1px solid #ccc;
+	background-color: #eff0e2;
 }

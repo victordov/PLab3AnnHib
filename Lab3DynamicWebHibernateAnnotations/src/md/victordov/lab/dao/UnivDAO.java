@@ -18,9 +18,6 @@ import org.hibernate.criterion.Projections;
 
 public class UnivDAO implements GenericDAO<Universitate>, Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
 	private Session session;

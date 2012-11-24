@@ -9,7 +9,13 @@
 <%@ page import="java.io.PrintWriter"%>
 <%@ page import="java.util.List"%>
 <%@ page import="md.victordov.lab.dao.*"%>
-
+<!DOCTYPE html>
+<%
+	/**
+	 *@author Victor Dovgaliuc
+	 *Stud Curs is the main page which will help you to insert, delete and edit the data of type StudCurs
+	 */
+%>
 <html>
 <head>
 <link href="<%=request.getContextPath()%>/style.css" rel="stylesheet"
@@ -42,19 +48,19 @@ function deleteRecord(id){
 	<%
 		int pageNr = 1;
 		int pageSize = 2;
-		try {
-			if (request.getParameter("pageNr") != null) {
+
+		if (request.getParameter("pageNr") != null) {
+			try {
 				pageNr = Integer.parseInt(request.getParameter("pageNr"));
+			} catch (NumberFormatException e) {
+				pageNr = 1;
 			}
-		} catch (Exception e) {
-			pageNr = 1;
 		}
+
 		GenericDAO<StudCurs> genDao = new StudCursDAO();
 		List<StudCurs> studCursList;
 		studCursList = genDao.retrieve(pageNr, pageSize);
 	%>
-	<br />
-	<br />
 	<br />
 	<br />
 	<form method="post" name="form">
@@ -109,6 +115,9 @@ function deleteRecord(id){
 	<table>
 		<tr>
 			<%
+				/*
+				 *Pagination Logic
+				 */
 				int pageFor = (int) Math.ceil((double) studCursListSize
 						/ (double) pageSize);
 				for (int i = 1; i <= pageFor; i++) {

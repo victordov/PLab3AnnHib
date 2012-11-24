@@ -7,6 +7,12 @@
 <%@ page import="java.io.PrintWriter"%>
 <%@ page import="java.util.List"%>
 <%@ page import="md.victordov.lab.dao.*"%>
+<!DOCTYPE html>
+<%
+	/**
+	 *Inser student page will insert new record in the database. In case the user submits a request with blank field(s) a void action will be taken. 
+	 */
+%>
 <html>
 <head>
 <link href="<%=request.getContextPath()%>/style.css" rel="stylesheet"

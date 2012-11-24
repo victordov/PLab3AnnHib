@@ -7,6 +7,9 @@
 <%@ page import="java.io.PrintWriter"%>
 <%@ page import="java.util.List"%>
 <%@ page import="md.victordov.lab.dao.*"%>
+<!DOCTYPE html>
+<!-- Insert Universitate is a page which will guide the user through inserting new data to the database -->
+
 <html>
 <head>
 <link href="<%=request.getContextPath()%>/style.css" rel="stylesheet"
@@ -21,8 +24,13 @@
 	<form method="post"
 		action="<%=request.getContextPath()%>/Universitate/insertUnivForm.jsp">
 		<%
+			//Upcasting UnivDAO to Genric to manipulate 'universitate' table data
 			GenericDAO<Universitate> genDao = new UnivDAO();
+
+			//Declaring class univ
 			Universitate univ = new Universitate();
+
+			//Declare a list of class Universitate
 			List<Universitate> listUniv;
 			listUniv = genDao.retrieve();
 		%>
@@ -40,17 +48,16 @@
 					value=""></td>
 				<td><input type="text" placeholder="Telefon" name="Telefon"
 					value=""></td>
-
 			</tr>
 			<tr>
 				<td colspan="6"><input type="submit" name="Submit"
 					value="Insert"
 					style="background-color: #49743D; font-weight: bold; color: #ffffff;"></td>
 			</tr>
-
 		</table>
 	</form>
 
+	<!-- Will insert the record only in case if the all fields are not null -->
 	<%
 		if ("POST".equalsIgnoreCase(request.getMethod())
 				&& (request.getParameter("Denumire") != null)

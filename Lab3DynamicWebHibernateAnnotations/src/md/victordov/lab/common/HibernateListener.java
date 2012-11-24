@@ -3,6 +3,13 @@ package md.victordov.lab.common;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
+/**
+ * 
+ * @author VictorDov
+ * 
+ *         Puts the HiberanteUtil in ContextListener, this should be done to
+ *         access the object as static class
+ */
 public class HibernateListener implements ServletContextListener {
 
 	public void contextInitialized(ServletContextEvent event) {

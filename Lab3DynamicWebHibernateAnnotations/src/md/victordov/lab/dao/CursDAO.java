@@ -15,10 +15,15 @@ import md.victordov.lab.vo.Curs;
 import md.victordov.lab.vo.Curs;
 
 public class CursDAO implements Serializable, GenericDAO<Curs> {
-
+	
 	/**
+	 * @author VictorDov
 	 * 
+	 *         DAO class CursDAO manages the Curs objects ( creates, reads one
+	 *         or all or predefined number, updates, deletes, counts the number
+	 *         of records.
 	 */
+
 	private static final long serialVersionUID = 1L;
 	private Session session;
 
@@ -53,18 +58,13 @@ public class CursDAO implements Serializable, GenericDAO<Curs> {
 
 		try {
 			Curs instance = (Curs) session.get(Curs.class, id);
-			if (instance == null) {
-				System.out.println("get successful, no instance found");
-			} else {
-				System.out.println("get successful, instance found");
-			}
+
 			return instance;
 		} catch (HibernateException he) {
 			if (tx != null)
 				tx.rollback();
 			throw new MyDaoException(ErrorList.RETRIEVE_ERR_KEY, he);
 		} catch (RuntimeException re) {
-			System.out.println("get failed");
 			re.printStackTrace();
 			throw re;
 		} finally {

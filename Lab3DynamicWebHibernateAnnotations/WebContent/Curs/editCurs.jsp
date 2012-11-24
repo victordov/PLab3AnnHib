@@ -9,7 +9,13 @@
 <%@ page import="java.io.PrintWriter"%>
 <%@ page import="java.util.List"%>
 <%@ page import="md.victordov.lab.dao.*"%>
-<html>
+<!DOCTYPE html>
+<%
+	/**
+	 *@author Victor Dovgaliuc
+	 *Curs Edit page. Handles the post request in case the id is received through a different way thant post method the request will be ignorred.
+	 */
+%>
 <html>
 <head>
 <link href="<%=request.getContextPath()%>/style.css" rel="stylesheet"
@@ -66,7 +72,11 @@
 
 	<!-- Edit form function -->
 	<%
-		if ("POST".equalsIgnoreCase(request.getMethod())
+		/*
+			 *Logic statement for inserting the data into the database
+			 */
+
+			if ("POST".equalsIgnoreCase(request.getMethod())
 					&& (request.getParameter("id") != null)
 					&& (request.getParameter("Nume") != null)
 					&& (request.getParameter("UniverID") != null)

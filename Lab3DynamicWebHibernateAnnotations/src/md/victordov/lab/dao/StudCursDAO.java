@@ -16,7 +16,11 @@ import md.victordov.lab.vo.StudCurs;
 public class StudCursDAO implements Serializable, GenericDAO<StudCurs> {
 
 	/**
+	 * @author VictorDov
 	 * 
+	 *         DAO class StudCurs manages the StudCurs objects ( creates, reads
+	 *         one or all or predefined number, updates, deletes, counts the
+	 *         number of records.
 	 */
 	private static final long serialVersionUID = 1L;
 
@@ -28,8 +32,7 @@ public class StudCursDAO implements Serializable, GenericDAO<StudCurs> {
 		Transaction tx = session.beginTransaction();
 		List<StudCurs> list = null;
 		try {
-			list = (List<StudCurs>) session.createQuery("from StudCurs")
-					.list();
+			list = (List<StudCurs>) session.createQuery("from StudCurs").list();
 			tx.commit();
 		} catch (HibernateException he) {
 			if (tx != null)
@@ -78,9 +81,9 @@ public class StudCursDAO implements Serializable, GenericDAO<StudCurs> {
 		try {
 			StudCurs instance = (StudCurs) session.get(StudCurs.class, id);
 			if (instance == null) {
-				System.out.println("get successful, no instance found");
+
 			} else {
-				System.out.println("get successful, instance found");
+
 			}
 			return instance;
 		} catch (HibernateException he) {
@@ -88,7 +91,6 @@ public class StudCursDAO implements Serializable, GenericDAO<StudCurs> {
 				tx.rollback();
 			throw new MyDaoException(ErrorList.RETRIEVE_ERR_KEY, he);
 		} catch (RuntimeException re) {
-			System.out.println("get failed");
 			re.printStackTrace();
 			throw re;
 		} finally {
@@ -148,8 +150,7 @@ public class StudCursDAO implements Serializable, GenericDAO<StudCurs> {
 		Transaction tx = session.beginTransaction();
 
 		Long count = ((Long) session
-				.createQuery(
-						"select count(*) from StudCurs as studentStudCurs")
+				.createQuery("select count(*) from StudCurs as studentStudCurs")
 				.iterate().next()).longValue();
 		tx.commit();
 		return count;

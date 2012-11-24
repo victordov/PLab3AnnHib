@@ -7,7 +7,7 @@
 <%@ page import="java.io.PrintWriter"%>
 <%@ page import="java.util.List"%>
 <%@ page import="md.victordov.lab.dao.*"%>
-
+<!DOCTYPE html>
 <html>
 <head>
 <link href="<%=request.getContextPath()%>/style.css" rel="stylesheet"

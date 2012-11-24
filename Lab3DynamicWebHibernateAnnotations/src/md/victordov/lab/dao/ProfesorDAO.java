@@ -16,7 +16,11 @@ import md.victordov.lab.vo.Profesor;
 public class ProfesorDAO implements Serializable, GenericDAO<Profesor> {
 
 	/**
+	 * @author VictorDov
 	 * 
+	 *         DAO class ProfesorDAO manages the Profesor objects ( creates,
+	 *         reads one or all or predefined number, updates, deletes, counts
+	 *         the number of records.
 	 */
 	private static final long serialVersionUID = 1L;
 
@@ -49,18 +53,12 @@ public class ProfesorDAO implements Serializable, GenericDAO<Profesor> {
 
 		try {
 			Profesor instance = (Profesor) session.get(Profesor.class, id);
-			if (instance == null) {
-				System.out.println("get successful, no instance found");
-			} else {
-				System.out.println("get successful, instance found");
-			}
 			return instance;
 		} catch (HibernateException he) {
 			if (tx != null)
 				tx.rollback();
 			throw new MyDaoException(ErrorList.RETRIEVE_ERR_KEY, he);
 		} catch (RuntimeException re) {
-			System.out.println("get failed");
 			re.printStackTrace();
 			throw re;
 		} finally {
@@ -72,9 +70,16 @@ public class ProfesorDAO implements Serializable, GenericDAO<Profesor> {
 	public void create(Profesor t) throws MyDaoException {
 
 		session = HibernateUtil.getSessionFactory().openSession();
+
 		Transaction tx = session.beginTransaction();
-		session.save(t);
-		tx.commit();
+		try {
+			session.save(t);
+			tx.commit();
+		} catch (HibernateException he) {
+			tx.rollback();
+		} finally {
+			session.close();
+		}
 
 	}
 

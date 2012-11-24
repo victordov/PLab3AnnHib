@@ -9,7 +9,8 @@ import org.hibernate.service.ServiceRegistryBuilder;
 
 /**
  * 
- * @author victordov
+ * @author VictorDov HibernateUtil - creates and manages sessions. Pattern:
+ *         Singleton & Abstract Factory
  */
 public class HibernateUtil {
 
@@ -25,7 +26,6 @@ public class HibernateUtil {
 					configuration.getProperties()).buildServiceRegistry();
 			sessionFactory = configuration.buildSessionFactory(serviceRegistry);
 		} catch (HibernateException he) {
-			System.out.println(he.getMessage());
 			throw he;
 		}
 

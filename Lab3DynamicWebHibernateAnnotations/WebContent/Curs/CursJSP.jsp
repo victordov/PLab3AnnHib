@@ -12,7 +12,7 @@
 <%@ page import="java.util.List"%>
 <%@ page import="md.victordov.lab.dao.*"%>
 <%@ page import="md.victordov.lab.common.exception.MyDaoException"%>
-
+<!DOCTYPE html>
 <html>
 <head>
 <link href="<%=request.getContextPath()%>/style.css" rel="stylesheet"

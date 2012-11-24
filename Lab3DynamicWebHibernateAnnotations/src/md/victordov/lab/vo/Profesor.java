@@ -18,6 +18,7 @@ import javax.persistence.Table;
 @Table(name = "profesor", catalog = "uni2_4t")
 public class Profesor implements java.io.Serializable {
 
+	private static final long serialVersionUID = 1L;
 	private Integer PId;
 	private String nume;
 	private String prenume;

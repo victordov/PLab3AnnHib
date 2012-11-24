@@ -10,6 +10,7 @@
 <%@ page import="java.io.PrintWriter"%>
 <%@ page import="java.util.List"%>
 <%@ page import="md.victordov.lab.dao.*"%>
+<!DOCTYPE html>
 <html>
 <head>
 <link href="<%=request.getContextPath()%>/style.css" rel="stylesheet"
@@ -20,7 +21,7 @@
 	<!-- Header -->
 	<%@ include file="/headerJSP.jsp"%>
 
-	<!-- Script pentru redirectionarea spre pagina de editare-->
+	<!-- Script to write the id of the class Universitate to the get method-->
 	<script>
 function editRecord(idUniversitate){
     var f=document.form;
@@ -30,6 +31,7 @@ function editRecord(idUniversitate){
 }
 </script>
 
+	<!-- Script which deletes the record if such exists. Sends the id of the object Universitate that needs to be deleted through the get method -->
 	<script>
 function deleteRecord(idUniversitate){
     var f=document.form;
@@ -55,6 +57,7 @@ function deleteRecord(idUniversitate){
 	%>
 	<br />
 	<br />
+	<!-- Main form which handles the displays all the data from database using tables -->
 	<form method="post" name="form">
 		<table id="data">
 			<caption>Universitate</caption>
@@ -80,14 +83,21 @@ function deleteRecord(idUniversitate){
 				<td><%=univList.get(i).getNumeUniver()%></td>
 				<td><%=univList.get(i).getAdresa()%></td>
 				<td><%=univList.get(i).getTelefon()%></td>
+
+				<!-- Edit button, information is sent to edit page with aid of javaScript and method get -->
 				<td><input type="button" name="edit" value="Edit"
 					style="background-color: green; font-weight: bold; color: white;"
 					onclick="editRecord(<%=univList.get(i).getUId()%>);"></td>
+
+				<!-- Edit button, information is sent to delete page with aid of javaScript and method get -->
 				<td><input type="button" name="delete" value="Delete"
 					style="background-color: red; font-weight: bold; color: white;"
 					onclick="deleteRecord(<%=univList.get(i).getUId()%>);"></td>
 				<%
-					if (i == 0) {
+					/**
+						 * Insert record logic
+						 */
+						if (i == 0) {
 							out.print("<td colspan = \""
 									+ univList.size()
 									+ "\"><a href=\"insertUnivForm.jsp\"><input type=\"button\" name=\"insert\"");
@@ -101,6 +111,8 @@ function deleteRecord(idUniversitate){
 		</table>
 	</form>
 	<br />
+	<!-- Pagination logic. Will start the page at number 1 and will count the display pages by
+	dividing total number of records to the number of records required to display on the page  -->
 	<table>
 		<tr>
 			<%

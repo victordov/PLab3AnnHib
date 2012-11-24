@@ -7,6 +7,14 @@
 <%@ page import="java.io.PrintWriter"%>
 <%@ page import="java.util.List"%>
 <%@ page import="md.victordov.lab.dao.*"%>
+<!DOCTYPE html>
+
+<%
+	/**
+	 *@author Victor Dovgaliuc
+	 *insert StudCurs page will inser the StudCurs record using anotation and take into consideration the relationship between tables
+	 */
+%>
 <html>
 <head>
 <link href="<%=request.getContextPath()%>/style.css" rel="stylesheet"

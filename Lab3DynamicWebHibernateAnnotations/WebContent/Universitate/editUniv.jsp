@@ -7,7 +7,9 @@
 <%@ page import="java.io.PrintWriter"%>
 <%@ page import="java.util.List"%>
 <%@ page import="md.victordov.lab.dao.*"%>
-
+<!DOCTYPE html>
+<!-- Edit Universitate is a jsp page that edits the record of the Universitate table
+in case that the user will try to access the page through the get method a black page will be displayed -->
 <html>
 <head>
 <link href="<%=request.getContextPath()%>/style.css" rel="stylesheet"
@@ -53,6 +55,7 @@
 		</table>
 	</form>
 
+<!-- All fields are checked if not null to avoid black data to be inserted in the table Unviersitate -->
 	<%
 		if ("POST".equalsIgnoreCase(request.getMethod())
 					&& request.getParameter("idUniversitate") != null

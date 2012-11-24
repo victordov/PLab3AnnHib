@@ -9,6 +9,7 @@
 <%@ page import="java.io.PrintWriter"%>
 <%@ page import="java.util.ArrayList"%>
 <%@ page import="md.victordov.lab.dao.*"%>
+<!DOCTYPE html>
 <html>
 <head>
 <link href="<%=request.getContextPath()%>/style.css" rel="stylesheet"
@@ -44,12 +45,14 @@
 				<td><input type="submit" name="Submit" value="Update"
 					style="background-color: #49743D; font-weight: bold; color: #ffffff;"></td>
 			</tr>
-
 		</table>
 	</form>
 
 	<!-- Update Function -->
 	<%
+		/*
+		 *If statement will handle the request and will deny the inserting of the object into database if any filed will be received null
+		 */
 		if ("POST".equalsIgnoreCase(request.getMethod())
 				&& (request.getParameter("id") != null)
 				&& (request.getParameter("StudID") != null)
@@ -75,11 +78,8 @@
 			studCursObject.setCurs(curs);
 			genDao.update(studCursObject);
 		}
-	%>
-
-
-	<a href="<%=request.getContextPath()%>/StudCurs/StudCurs.jsp">Apasa
-		aici: <strong>Student Curs </strong>
+	%>Click here:
+	<a href="<%=request.getContextPath()%>/StudCurs/StudCurs.jsp"><strong>StudentCurs</strong>
 	</a>
 
 	<!-- Footer -->

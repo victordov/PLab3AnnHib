@@ -7,7 +7,7 @@
 <%@ page import="java.io.PrintWriter"%>
 <%@ page import="java.util.List"%>
 <%@ page import="md.victordov.lab.dao.*"%>
-<html>
+<!DOCTYPE html>
 <html>
 <head>
 <link href="<%=request.getContextPath()%>/style.css" rel="stylesheet"
@@ -37,8 +37,10 @@
 			</tr>
 			<tr>
 				<td><input type="text" name="Nume" value="" placeholder="Nume"></td>
-				<td><input type="text" name="UniverID" value="" placeholder="Univer Id"></td>
-				<td><input type="text" name="ProfID" value="" placeholder="Profesor Id"></td>
+				<td><input type="text" name="UniverID" value=""
+					placeholder="Univer Id"></td>
+				<td><input type="text" name="ProfID" value=""
+					placeholder="Profesor Id"></td>
 			</tr>
 			<tr>
 				<td><input type="submit" name="Submit" value="Insert"

@@ -7,6 +7,14 @@
 <%@ page import="java.io.PrintWriter"%>
 <%@ page import="java.util.ArrayList"%>
 <%@ page import="md.victordov.lab.dao.*"%>
+<!DOCTYPE html>
+
+<%
+	/**
+	 *@author Victor Dovgaliuc
+	 *Delete StudCurs (Student <--> Curs) from database  
+	 */
+%>
 
 <html>
 <head>
@@ -25,7 +33,9 @@
 		Integer idStudCurs = Integer.parseInt(idStudCursString);
 		genDao.delete(idStudCurs);
 	%>
-	<a href="<%=request.getContextPath()%>/StudCurs/StudCurs.jsp">Click here: <strong>StudCurs Curs</strong></a>
+	<a href="<%=request.getContextPath()%>/StudCurs/StudCurs.jsp">Click
+		here: <strong>StudCurs Curs</strong>
+	</a>
 
 	<!-- Footer -->
 	<%@ include file="/footerJSP.jsp"%>

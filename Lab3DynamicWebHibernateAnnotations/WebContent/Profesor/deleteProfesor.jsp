@@ -8,7 +8,7 @@
 <%@ page import="java.util.ArrayList"%>
 <%@ page import="md.victordov.lab.dao.ProfesorDAO"%>
 <%@ page import="md.victordov.lab.dao.GenericDAO"%>
-
+<!DOCTYPE html>
 <html>
 <head>
 <link href="<%=request.getContextPath()%>/style.css" rel="stylesheet"

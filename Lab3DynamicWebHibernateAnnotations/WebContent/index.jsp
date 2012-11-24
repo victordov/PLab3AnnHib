@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-
+<!DOCTYPE html>
 <html>
 <head>
 <link href="<%=request.getContextPath()%>/style.css" rel="stylesheet"
@@ -23,7 +23,11 @@
 				<li>Profesor</li>
 				<li>Universitate</li>
 			</ul>
-			<p>All information is retrieved usingHibernate 4.1</p>
+			<p>All information is retrieved using Hibernate 4.1.
+				Particularily this project is created using annotations</p>
+			<img src="<%=request.getContextPath()%>/images/dbDiagram.png"
+				alt="Database Diagram" height="382" width="500" />
+
 		</div>
 		<br />
 	</div>

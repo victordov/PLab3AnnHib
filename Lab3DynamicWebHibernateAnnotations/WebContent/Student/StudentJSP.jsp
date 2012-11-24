@@ -7,7 +7,14 @@
 <%@ page import="java.io.PrintWriter"%>
 <%@ page import="java.util.List"%>
 <%@ page import="md.victordov.lab.dao.*"%>
-
+<!DOCTYPE html>
+<%
+	/**
+	 *@author Victor Dovgaliuc
+	 *Main Student page. Displays the Student data in rows defined implicit in the jsp file. Variable which handles number of records is  pageSize.
+	 *Deleting, inserting and editing the Student data is made with the aid the of the scripts (javaScript)
+	 */
+%>
 <html>
 <head>
 <link href="<%=request.getContextPath()%>/style.css" rel="stylesheet"
@@ -110,6 +117,9 @@ function deleteRecord(id){
 	<table>
 		<tr>
 			<%
+				/**
+				 *Pagination logic ( All pages divided page the pageSize will give the number of pages that should be displayed)
+				 */
 				int pageFor = (int) Math.ceil((double) studListSize
 						/ (double) pageSize);
 				for (int i = 1; i <= pageFor; i++) {
