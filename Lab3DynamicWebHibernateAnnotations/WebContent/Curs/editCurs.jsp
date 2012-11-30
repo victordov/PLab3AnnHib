@@ -1,14 +1,20 @@
+<%@page import="md.victordov.lab.common.exception.MyDaoException"%>
+<%@page import="md.victordov.lab.common.exception.ErrorList"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@ page import="md.*"%>
 <%@ page import="md.victordov.lab.vo.*"%>
 <%@ page import="md.victordov.lab.dao.CursDAO"%>
 <%@ page import="md.victordov.lab.vo.Universitate"%>
-<%@ page import="md.victordov.lab.vo.Curs"%>
 <%@ page import="md.victordov.lab.vo.Profesor"%>
+<%@ page import="md.victordov.lab.vo.Curs"%>
 <%@ page import="java.io.PrintWriter"%>
 <%@ page import="java.util.List"%>
 <%@ page import="md.victordov.lab.dao.*"%>
+<%@ page import="md.victordov.lab.common.exception.MyDaoException"%>
+<%@ page import="md.victordov.lab.services.GenericService"%>
+<%@ page import="md.victordov.lab.services.CursService"%>
+<%@ page import="md.victordov.lab.view.model.CursModel"%>
 <!DOCTYPE html>
 <%
 	/**
@@ -33,15 +39,15 @@
 	<div id="wrapper">
 		<form method="post" action="editCurs.jsp">
 			<%
-				GenericDAO<Curs> genDao = new CursDAO();
-					Curs curs = new Curs();
+				GenericService<CursModel, Curs> gs = new CursService();
+					CursModel cursModel = new CursModel();
 					Integer idC = 0;
 					try {
 						idC = Integer.parseInt(request.getParameter("id"));
 					} catch (NumberFormatException e) {
 					}
 
-					curs = genDao.retrieve(idC);
+					cursModel = gs.retrieve(idC);
 			%>
 			<br /> <br />
 			<table>
@@ -55,11 +61,11 @@
 				</thead>
 				<tr>
 					<td><input type="text" name="Nume"
-						value="<%=curs.getNumeCurs()%>"></td>
+						value="<%=cursModel.getNumeCurs()%>"></td>
 					<td><input type="text" name="UniverID"
-						value="<%=curs.getUniversitate().getUId()%>"></td>
+						value="<%=cursModel.getuId()%>"></td>
 					<td><input type="text" name="ProfID"
-						value="<%=curs.getProfesor().getPId()%>"></td>
+						value="<%=cursModel.getpId()%>"></td>
 					<td><input type="hidden" name="id" value="<%=idC%>"></td>
 				</tr>
 				<tr>
@@ -96,11 +102,11 @@
 				Profesor profesor = new Profesor();
 				profesor.setPId(profID);
 
-				curs.setCId(idCurs);
-				curs.setNumeCurs(numeCurs);
-				curs.setUniversitate(universitate);
-				curs.setProfesor(profesor);
-				genDao.update(curs);
+				cursModel.setcId(idCurs);
+				cursModel.setNumeCurs(numeCurs);
+				cursModel.setuId(univerID);
+				cursModel.setpId(profID);
+				gs.update(cursModel);
 			}
 		}
 	%>

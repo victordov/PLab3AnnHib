@@ -2,11 +2,11 @@
 	pageEncoding="ISO-8859-1"%>
 <%@ page import="md.*"%>
 <%@ page import="md.victordov.lab.vo.*"%>
-<%@ page import="md.victordov.lab.dao.UnivDAO"%>
-<%@ page import="md.victordov.lab.vo.Universitate"%>
+<%@ page import="md.victordov.lab.services.GenericService"%>
+<%@ page import="md.victordov.lab.services.UniversitateService"%>
+<%@ page import="md.victordov.lab.view.model.UniversitateModel"%>
 <%@ page import="java.io.PrintWriter"%>
 <%@ page import="java.util.List"%>
-<%@ page import="md.victordov.lab.dao.*"%>
 <!DOCTYPE html>
 <!-- Insert Universitate is a page which will guide the user through inserting new data to the database -->
 
@@ -25,14 +25,14 @@
 		action="<%=request.getContextPath()%>/Universitate/insertUnivForm.jsp">
 		<%
 			//Upcasting UnivDAO to Genric to manipulate 'universitate' table data
-			GenericDAO<Universitate> genDao = new UnivDAO();
+			GenericService<UniversitateModel,Universitate> genService = new UniversitateService();
 
-			//Declaring class univ
-			Universitate univ = new Universitate();
+			//Declaring class univModel
+			UniversitateModel univModel = new UniversitateModel();
 
-			//Declare a list of class Universitate
-			List<Universitate> listUniv;
-			listUniv = genDao.retrieve();
+			//Declare a list of class UniversitateModel
+			List<UniversitateModel> univModelList;
+			univModelList = genService.retrieve();
 		%>
 		<table>
 			<caption>Insert Universitate</caption>
@@ -68,10 +68,10 @@
 			String adresaUniver = request.getParameter("Adresa");
 			String telefonUniver = request.getParameter("Telefon");
 
-			univ.setNumeUniver(denumUniver);
-			univ.setAdresa(adresaUniver);
-			univ.setTelefon(telefonUniver);
-			genDao.create(univ);
+			univModel.setNumeUniver(denumUniver);
+			univModel.setAdresa(adresaUniver);
+			univModel.setTelefon(telefonUniver);
+			genService.create(univModel);
 		}
 	%>
 	<a href="<%=request.getContextPath()%>/Universitate/UnivJSP.jsp">Apasa

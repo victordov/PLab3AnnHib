@@ -2,10 +2,11 @@
 	pageEncoding="ISO-8859-1"%>
 <%@ page import="md.*"%>
 <%@ page import="md.victordov.lab.vo.*"%>
-<%@ page import="md.victordov.lab.dao.StudentDAO"%>
-<%@ page import="md.victordov.lab.vo.Student"%>
+<%@ page import="md.victordov.lab.services.GenericService"%>
+<%@ page import="md.victordov.lab.services.StudentService"%>
+<%@ page import="md.victordov.lab.view.model.StudentModel"%>
 <%@ page import="java.io.PrintWriter"%>
-<%@ page import="java.util.ArrayList"%>
+<%@ page import="java.util.List"%>
 <%@ page import="md.victordov.lab.dao.*"%>
 <!DOCTYPE html>
 
@@ -27,11 +28,12 @@
 
 	<form method="post" action="editStudent.jsp">
 		<%
-			GenericDAO<Student> genDao = new StudentDAO();
-				Student stud = new Student();
+			GenericService<StudentModel, Student> genService = new StudentService();
+
+				StudentModel stud = new StudentModel();
 				String id = request.getParameter("id");
 				Integer no = Integer.parseInt(id);
-				stud = genDao.retrieve(no);
+				stud = genService.retrieve(no);
 		%>
 		<br /> <br />
 		<table>
@@ -88,7 +90,7 @@
 				stud.setGrupa(grupaStudent);
 				stud.setEmail(emailStudent);
 				stud.setTelFix(telefonStudent);
-				genDao.update(stud);
+				genService.update(stud);
 
 			}
 	%>

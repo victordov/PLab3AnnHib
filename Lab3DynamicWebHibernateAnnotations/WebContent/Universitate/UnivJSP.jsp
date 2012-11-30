@@ -2,14 +2,12 @@
 	pageEncoding="ISO-8859-1"%>
 <%@ page import="md.*"%>
 <%@ page import="md.victordov.lab.vo.*"%>
-<%@ page import="md.victordov.lab.dao.UnivDAO"%>
-<%@ page import="md.victordov.lab.vo.Universitate"%>
-<%@ page import="md.victordov.lab.vo.Curs"%>
-<%@ page import="md.victordov.lab.vo.StudCurs"%>
-<%@ page import="md.victordov.lab.vo.Student"%>
+<%@ page import="md.victordov.lab.services.GenericService"%>
+<%@ page import="md.victordov.lab.services.UniversitateService"%>
+<%@ page import="md.victordov.lab.view.model.UniversitateModel"%>
 <%@ page import="java.io.PrintWriter"%>
 <%@ page import="java.util.List"%>
-<%@ page import="md.victordov.lab.dao.*"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -51,9 +49,9 @@ function deleteRecord(idUniversitate){
 		} catch (Exception e) {
 			pageNr = 1;
 		}
-		GenericDAO<Universitate> genDao = new UnivDAO();
-		List<Universitate> univList;
-		univList = genDao.retrieve(pageNr, pageSize);
+		GenericService<UniversitateModel, Universitate> genService = new UniversitateService();
+		List<UniversitateModel> univModelList;
+		univModelList = genService.retrieve(pageNr, pageSize);
 	%>
 	<br />
 	<br />
@@ -73,33 +71,33 @@ function deleteRecord(idUniversitate){
 				</tr>
 			</thead>
 			<%
-				int univListSize = 0;
-				univListSize = genDao.countSize().intValue();
+				int univModelListSize = 0;
+				univModelListSize = genService.countSize().intValue();
 				int ox = (pageNr * pageSize) - pageSize;
-				for (int i = 0; (i < pageSize) && (i < univList.size()); i++) {
+				for (int i = 0; (i < pageSize) && (i < univModelList.size()); i++) {
 			%>
 			<tr>
-				<td><%=univList.get(i).getUId()%></td>
-				<td><%=univList.get(i).getNumeUniver()%></td>
-				<td><%=univList.get(i).getAdresa()%></td>
-				<td><%=univList.get(i).getTelefon()%></td>
+				<td><%=univModelList.get(i).getUId()%></td>
+				<td><%=univModelList.get(i).getNumeUniver()%></td>
+				<td><%=univModelList.get(i).getAdresa()%></td>
+				<td><%=univModelList.get(i).getTelefon()%></td>
 
 				<!-- Edit button, information is sent to edit page with aid of javaScript and method get -->
 				<td><input type="button" name="edit" value="Edit"
 					style="background-color: green; font-weight: bold; color: white;"
-					onclick="editRecord(<%=univList.get(i).getUId()%>);"></td>
+					onclick="editRecord(<%=univModelList.get(i).getUId()%>);"></td>
 
 				<!-- Edit button, information is sent to delete page with aid of javaScript and method get -->
 				<td><input type="button" name="delete" value="Delete"
 					style="background-color: red; font-weight: bold; color: white;"
-					onclick="deleteRecord(<%=univList.get(i).getUId()%>);"></td>
+					onclick="deleteRecord(<%=univModelList.get(i).getUId()%>);"></td>
 				<%
 					/**
 						 * Insert record logic
 						 */
 						if (i == 0) {
 							out.print("<td colspan = \""
-									+ univList.size()
+									+ univModelList.size()
 									+ "\"><a href=\"insertUnivForm.jsp\"><input type=\"button\" name=\"insert\"");
 							out.print(" value=\"Insert\" style=\"background-color:blue;font-weight:bold;color:white;\" ></a></td>");
 						}
@@ -116,7 +114,7 @@ function deleteRecord(idUniversitate){
 	<table>
 		<tr>
 			<%
-				int pageFor = (int) Math.ceil((double) univListSize
+				int pageFor = (int) Math.ceil((double) univModelListSize
 						/ (double) pageSize);
 				for (int i = 1; i <= pageFor; i++) {
 					if (i == pageNr) {

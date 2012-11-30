@@ -2,9 +2,12 @@
 	pageEncoding="ISO-8859-1"%>
 <%@ page import="md.*"%>
 <%@ page import="md.victordov.lab.vo.*"%>
+<%@ page import="md.victordov.lab.services.ProfesorService"%>
+<%@ page import="md.victordov.lab.services.GenericService"%>
 <%@ page import="md.victordov.lab.vo.Profesor"%>
+<%@ page import="md.victordov.lab.view.model.ProfesorModel"%>
 <%@ page import="java.io.PrintWriter"%>
-<%@ page import="java.util.ArrayList"%>
+<%@ page import="java.util.List"%>
 <%@ page import="md.victordov.lab.dao.*"%>
 <!DOCTYPE html>
 <html>
@@ -17,19 +20,21 @@
 
 	<!-- Header -->
 	<%@ include file="/headerJSP.jsp"%>
-	<%if ("POST".equalsIgnoreCase(request.getMethod())
-			&& (request.getParameter("id") != null)){ %>
+	<%
+		if ("POST".equalsIgnoreCase(request.getMethod())
+				&& (request.getParameter("id") != null)) {
+	%>
 	<div id="wrapper">
 		<form method="post" action="editProfesor.jsp">
 			<%
-				GenericDAO<Profesor> genDao = new ProfesorDAO();
-				Profesor prof = new Profesor();
-				Integer id = 0;
-				try {
-					id = Integer.parseInt(request.getParameter("id"));
-				} catch (NumberFormatException e) {
-				}
-				prof = genDao.retrieve(id);
+				GenericService<ProfesorModel, Profesor> genService = new ProfesorService();
+					ProfesorModel profesorModel = new ProfesorModel();
+					Integer id = 0;
+					try {
+						id = Integer.parseInt(request.getParameter("id"));
+					} catch (NumberFormatException e) {
+					}
+					profesorModel = genService.retrieve(id);
 			%>
 			<br /> <br />
 			<table>
@@ -40,11 +45,12 @@
 					<th>Adresa</th>
 				</tr>
 				<tr>
-					<td><input type="text" name="Nume" value="<%=prof.getNume()%>"></td>
+					<td><input type="text" name="Nume"
+						value="<%=profesorModel.getNume()%>"></td>
 					<td><input type="text" name="Prenume"
-						value="<%=prof.getPrenume()%>"></td>
+						value="<%=profesorModel.getPrenume()%>"></td>
 					<td><input type="text" name="Adresa"
-						value="<%=prof.getAdresa()%>"></td>
+						value="<%=profesorModel.getAdresa()%>"></td>
 					<td><input type="hidden" name="id" value="<%=id%>"></td>
 				</tr>
 				<tr>
@@ -58,26 +64,26 @@
 	<!-- Edit Function -->
 	<%
 		if ("POST".equalsIgnoreCase(request.getMethod())
-				&& request.getParameter("id") != null
-				&& (request.getParameter("Nume") != null)
-				&& (request.getParameter("Prenume") != null)
-				&& (request.getParameter("Adresa") != null)) {
+					&& request.getParameter("id") != null
+					&& (request.getParameter("Nume") != null)
+					&& (request.getParameter("Prenume") != null)
+					&& (request.getParameter("Adresa") != null)) {
 
-			String idProfesorString = request.getParameter("id");
-			Integer idProfesor = Integer.parseInt(idProfesorString);
+				String idProfesorString = request.getParameter("id");
+				Integer idProfesor = Integer.parseInt(idProfesorString);
 
-			String numeProfesor = request.getParameter("Nume");
-			String prenumeProfesor = request.getParameter("Prenume");
-			String adresaProfesor = request.getParameter("Adresa");
+				String numeProfesor = request.getParameter("Nume");
+				String prenumeProfesor = request.getParameter("Prenume");
+				String adresaProfesor = request.getParameter("Adresa");
 
-			prof.setPId(idProfesor);
-			prof.setNume(numeProfesor);
-			prof.setPrenume(prenumeProfesor);
-			prof.setAdresa(adresaProfesor);
-			genDao.update(prof);
+				profesorModel.setPId(idProfesor);
+				profesorModel.setNume(numeProfesor);
+				profesorModel.setPrenume(prenumeProfesor);
+				profesorModel.setAdresa(adresaProfesor);
+				genService.update(profesorModel);
 
+			}
 		}
-	}
 	%>
 	<a href="<%=request.getContextPath()%>/Profesor/ProfesorJSP.jsp">Apasa
 		aici: <strong>Profesor</strong>

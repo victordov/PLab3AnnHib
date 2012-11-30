@@ -2,8 +2,9 @@
 	pageEncoding="ISO-8859-1"%>
 <%@ page import="md.*"%>
 <%@ page import="md.victordov.lab.vo.*"%>
-<%@ page import="md.victordov.lab.dao.StudentDAO"%>
-<%@ page import="md.victordov.lab.vo.Student"%>
+<%@ page import="md.victordov.lab.services.GenericService"%>
+<%@ page import="md.victordov.lab.services.StudentService"%>
+<%@ page import="md.victordov.lab.view.model.StudentModel"%>
 <%@ page import="java.io.PrintWriter"%>
 <%@ page import="java.util.List"%>
 <%@ page import="md.victordov.lab.dao.*"%>
@@ -26,10 +27,10 @@
 	<form method="post"
 		action="<%=request.getContextPath()%>/Student/insertStudentForm.jsp">
 		<%
-			GenericDAO<Student> genDao = new StudentDAO();
-			Student stud = new Student();
-			List<Student> arrayStud;
-			arrayStud = genDao.retrieve();
+			GenericService<StudentModel, Student> genService = new StudentService();
+			StudentModel stud = new StudentModel();
+			List<StudentModel> studModelList;
+			studModelList = genService.retrieve();
 		%>
 		<table>
 			<caption>Student Insert</caption>
@@ -79,7 +80,7 @@
 			stud.setGrupa(grupaStudent);
 			stud.setEmail(emailStudent);
 			stud.setTelFix(telefonStudent);
-			genDao.create(stud);
+			genService.create(stud);
 
 		}
 	%>

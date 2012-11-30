@@ -2,12 +2,14 @@
 	pageEncoding="ISO-8859-1"%>
 <%@ page import="md.*"%>
 <%@ page import="md.victordov.lab.vo.*"%>
-<%@ page import="md.victordov.lab.dao.StudCursDAO"%>
+<%@ page import="md.victordov.lab.services.GenericService"%>
+<%@ page import="md.victordov.lab.services.StudCursService"%>
+<%@ page import="md.victordov.lab.view.model.StudCursModel"%>
 <%@ page import="md.victordov.lab.vo.StudCurs"%>
-<%@ page import="md.victordov.lab.vo.Student"%>
 <%@ page import="md.victordov.lab.vo.Curs"%>
+<%@ page import="md.victordov.lab.vo.Student"%>
 <%@ page import="java.io.PrintWriter"%>
-<%@ page import="java.util.ArrayList"%>
+<%@ page import="java.util.List"%>
 <%@ page import="md.victordov.lab.dao.*"%>
 <!DOCTYPE html>
 <html>
@@ -21,11 +23,11 @@
 	<%@ include file="/headerJSP.jsp"%>
 	<form method="post" action="editStudCurs.jsp">
 		<%
-			GenericDAO<StudCurs> genDao = new StudCursDAO();
-			StudCurs studCursObject = new StudCurs();
+			GenericService<StudCursModel, StudCurs> genService = new StudCursService();
+			StudCursModel studCursModel = new StudCursModel();
 			String id = request.getParameter("id");
 			Integer no = Integer.parseInt(id);
-			studCursObject = genDao.retrieve(no);
+			studCursModel = genService.retrieve(no);
 		%>
 		<br /> <br />
 		<table>
@@ -36,9 +38,9 @@
 			</tr>
 			<tr>
 				<td><input type="text" name="StudID"
-					value="<%=studCursObject.getStudent().getSId()%>"></td>
+					value="<%=studCursModel.getStudentId()%>"></td>
 				<td><input type="text" name="CursID"
-					value="<%=studCursObject.getCurs().getCId()%>"></td>
+					value="<%=studCursModel.getCursId()%>"></td>
 				<td><input type="hidden" name="id" value="<%=no%>"></td>
 			</tr>
 			<tr>
@@ -62,21 +64,15 @@
 			Integer idStudCurs = Integer.parseInt(idStudCursString);
 
 			String studIdString = request.getParameter("StudID");
-			Integer studId = Integer.parseInt(studIdString);
+			Integer studentId = Integer.parseInt(studIdString);
 
 			String cursIdString = request.getParameter("CursID");
 			Integer cursId = Integer.parseInt(cursIdString);
 
-			Student student = new Student();
-			student.setSId(studId);
-
-			Curs curs = new Curs();
-			curs.setCId(cursId);
-
-			studCursObject.setScId(idStudCurs);
-			studCursObject.setStudent(student);
-			studCursObject.setCurs(curs);
-			genDao.update(studCursObject);
+			studCursModel.setScId(idStudCurs);
+			studCursModel.setStudentId(studentId);
+			studCursModel.setCursId(cursId);
+			genService.update(studCursModel);
 		}
 	%>Click here:
 	<a href="<%=request.getContextPath()%>/StudCurs/StudCurs.jsp"><strong>StudentCurs</strong>

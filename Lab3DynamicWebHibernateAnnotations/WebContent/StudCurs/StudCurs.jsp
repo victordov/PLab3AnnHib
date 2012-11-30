@@ -2,7 +2,9 @@
 	pageEncoding="ISO-8859-1"%>
 <%@ page import="md.*"%>
 <%@ page import="md.victordov.lab.vo.*"%>
-<%@ page import="md.victordov.lab.dao.StudCursDAO"%>
+<%@ page import="md.victordov.lab.services.GenericService"%>
+<%@ page import="md.victordov.lab.services.StudCursService"%>
+<%@ page import="md.victordov.lab.view.model.StudCursModel"%>
 <%@ page import="md.victordov.lab.vo.StudCurs"%>
 <%@ page import="md.victordov.lab.vo.Curs"%>
 <%@ page import="md.victordov.lab.vo.Student"%>
@@ -56,10 +58,9 @@ function deleteRecord(id){
 				pageNr = 1;
 			}
 		}
-
-		GenericDAO<StudCurs> genDao = new StudCursDAO();
-		List<StudCurs> studCursList;
-		studCursList = genDao.retrieve(pageNr, pageSize);
+		GenericService<StudCursModel, StudCurs> genService = new StudCursService();
+		List<StudCursModel> studCursModelList;
+		studCursModelList = genService.retrieve(pageNr, pageSize);
 	%>
 	<br />
 	<br />
@@ -79,20 +80,20 @@ function deleteRecord(id){
 			<%
 				int countID = 0;
 				int studCursListSize = 0;
-				studCursListSize = genDao.countSize().intValue();
+				studCursListSize = genService.countSize().intValue();
 				int ox = (pageNr * pageSize) - pageSize;
-				for (int i = 0; (i < pageSize) && (i < studCursList.size()); i++) {
+				for (int i = 0; (i < pageSize) && (i < studCursModelList.size()); i++) {
 			%>
 			<tr>
-				<td><%=studCursList.get(i).getScId()%></td>
-				<td><%=studCursList.get(i).getStudent().getSId()%></td>
-				<td><%=studCursList.get(i).getCurs().getCId()%></td>
+				<td><%=studCursModelList.get(i).getScId()%></td>
+				<td><%=studCursModelList.get(i).getStudentId()%></td>
+				<td><%=studCursModelList.get(i).getCursId()%></td>
 				<td><input type="button" name="edit" value="Edit"
 					style="background-color: green; font-weight: bold; color: white;"
-					onclick="editRecord(<%=studCursList.get(i).getScId()%>);"></td>
+					onclick="editRecord(<%=studCursModelList.get(i).getScId()%>);"></td>
 				<td><input type="button" name="delete" value="Delete"
 					style="background-color: red; font-weight: bold; color: white;"
-					onclick="deleteRecord(<%=studCursList.get(i).getScId()%>);"></td>
+					onclick="deleteRecord(<%=studCursModelList.get(i).getScId()%>);"></td>
 			</tr>
 			<%
 				}
@@ -101,7 +102,7 @@ function deleteRecord(id){
 				<td align="right" colspan="5">
 					<%
 						out.print("<td rowspan = \""
-								+ studCursList.size()
+								+ studCursModelList.size()
 								+ "\"><a href=\""
 								+ request.getContextPath()
 								+ "/StudCurs/insertStudCursForm.jsp\"><input type=\"button\" name=\"insert\"");

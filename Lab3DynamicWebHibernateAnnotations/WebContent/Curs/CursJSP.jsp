@@ -12,6 +12,9 @@
 <%@ page import="java.util.List"%>
 <%@ page import="md.victordov.lab.dao.*"%>
 <%@ page import="md.victordov.lab.common.exception.MyDaoException"%>
+<%@ page import="md.victordov.lab.services.GenericService"%>
+<%@ page import="md.victordov.lab.services.CursService"%>
+<%@ page import="md.victordov.lab.view.model.CursModel"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -46,7 +49,6 @@ function deleteRecord(id){
 	<%
 		int pageNr = 1;
 		int pageSize = 2;
-		GenericDAO<Curs> genDao = null;
 		try {
 			if (request.getParameter("pageNr") != null) {
 				pageNr = Integer.parseInt(request.getParameter("pageNr"));
@@ -54,9 +56,11 @@ function deleteRecord(id){
 		} catch (Exception e) {
 			pageNr = 1;
 		}
-		genDao = new CursDAO();
-		List<Curs> cursList = null;
-		cursList = genDao.retrieve(pageNr, pageSize);
+		GenericService<CursModel, Curs> gs = new CursService();
+		List<CursModel> cml = gs.retrieve(2, 3);
+
+		List<CursModel> cursModelList = null;
+		cursModelList = gs.retrieve(pageNr, pageSize);
 	%>
 	<br />
 	<br />
@@ -76,28 +80,28 @@ function deleteRecord(id){
 				</tr>
 			</thead>
 			<%
-				int cursListSize = 0;
-				cursListSize = genDao.countSize().intValue();
+				int cursModelListSize = 0;
+				cursModelListSize = gs.countSize().intValue();
 				int ox = (pageNr * pageSize) - pageSize;
-				for (int i = 0; (i < pageSize) && (i < cursList.size()); i++) {
+				for (int i = 0; (i < pageSize) && (i < cursModelList.size()); i++) {
 			%>
 			<tr>
-				<td><%=cursList.get(i).getCId()%></td>
-				<td><%=cursList.get(i).getNumeCurs()%></td>
-				<td><%=cursList.get(i).getUniversitate().getUId()%></td>
-				<td><%=cursList.get(i).getProfesor().getPId()%></td>
+				<td><%=cursModelList.get(i).getcId()%></td>
+				<td><%=cursModelList.get(i).getNumeCurs()%></td>
+				<td><%=cursModelList.get(i).getuId()%></td>
+				<td><%=cursModelList.get(i).getpId()%></td>
 				<td><input type="button" name="edit" value="Edit"
 					style="background-color: green; font-weight: bold; color: white;"
-					onclick="editRecord(<%=cursList.get(i).getCId()%>);"></td>
+					onclick="editRecord(<%=cursModelList.get(i).getcId()%>);"></td>
 				<td><input type="button" name="delete" value="Delete"
 					style="background-color: red; font-weight: bold; color: white;"
-					onclick="deleteRecord(<%=cursList.get(i).getCId()%>);"></td>
+					onclick="deleteRecord(<%=cursModelList.get(i).getcId()%>);"></td>
 			</tr>
 			<%
 				}
 			%>
 			<tr>
-				<td align="right" colspan="<%=cursList.size()%>">
+				<td align="right" colspan="<%=cursModelList.size()%>">
 					<%
 						out.print("<td colspan = \""
 								+ 7
@@ -112,7 +116,7 @@ function deleteRecord(id){
 	<table>
 		<tr>
 			<%
-				int pageFor = (int) Math.ceil((double) cursListSize
+				int pageFor = (int) Math.ceil((double) cursModelListSize
 						/ (double) pageSize);
 				for (int i = 1; i <= pageFor; i++) {
 					if (i == pageNr) {

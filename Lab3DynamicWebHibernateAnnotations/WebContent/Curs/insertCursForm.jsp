@@ -1,12 +1,20 @@
+<%@page import="md.victordov.lab.common.exception.MyDaoException"%>
+<%@page import="md.victordov.lab.common.exception.ErrorList"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@ page import="md.*"%>
 <%@ page import="md.victordov.lab.vo.*"%>
 <%@ page import="md.victordov.lab.dao.CursDAO"%>
 <%@ page import="md.victordov.lab.vo.Universitate"%>
+<%@ page import="md.victordov.lab.vo.Profesor"%>
+<%@ page import="md.victordov.lab.vo.Curs"%>
 <%@ page import="java.io.PrintWriter"%>
 <%@ page import="java.util.List"%>
 <%@ page import="md.victordov.lab.dao.*"%>
+<%@ page import="md.victordov.lab.common.exception.MyDaoException"%>
+<%@ page import="md.victordov.lab.services.GenericService"%>
+<%@ page import="md.victordov.lab.services.CursService"%>
+<%@ page import="md.victordov.lab.view.model.CursModel"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -23,10 +31,10 @@
 
 	<form method="post" action="insertCursForm.jsp">
 		<%
-			GenericDAO<Curs> genDao = new CursDAO();
-			Curs curs = new Curs();
-			List<Curs> arrayCurs;
-			arrayCurs = genDao.retrieve();
+			GenericService<CursModel, Curs> gs = new CursService();
+			CursModel cursModel = new CursModel();
+			List<CursModel> arrayCurs;
+			arrayCurs = gs.retrieve();
 		%>
 		<table>
 			<caption>Curs Insert</caption>
@@ -64,16 +72,10 @@
 			Integer profID = Integer.parseInt(request
 					.getParameter("ProfID"));
 
-			Universitate universitate = new Universitate();
-			universitate.setUId(univerID);
-
-			Profesor profesor = new Profesor();
-			profesor.setPId(profID);
-
-			curs.setNumeCurs(numeCurs);
-			curs.setUniversitate(universitate);
-			curs.setProfesor(profesor);
-			genDao.create(curs);
+			cursModel.setNumeCurs(numeCurs);
+			cursModel.setuId(univerID);
+			cursModel.setpId(profID);
+			gs.create(cursModel);
 		}
 	%>
 	<a href="<%=request.getContextPath()%>/Curs/CursJSP.jsp">Click

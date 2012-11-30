@@ -2,10 +2,14 @@
 	pageEncoding="ISO-8859-1"%>
 <%@ page import="md.*"%>
 <%@ page import="md.victordov.lab.vo.*"%>
-<%@ page import="md.victordov.lab.dao.StudCursDAO"%>
+<%@ page import="md.victordov.lab.services.GenericService"%>
+<%@ page import="md.victordov.lab.services.StudCursService"%>
+<%@ page import="md.victordov.lab.view.model.StudCursModel"%>
 <%@ page import="md.victordov.lab.vo.StudCurs"%>
+<%@ page import="md.victordov.lab.vo.Curs"%>
+<%@ page import="md.victordov.lab.vo.Student"%>
 <%@ page import="java.io.PrintWriter"%>
-<%@ page import="java.util.ArrayList"%>
+<%@ page import="java.util.List"%>
 <%@ page import="md.victordov.lab.dao.*"%>
 <!DOCTYPE html>
 
@@ -26,12 +30,10 @@
 	<!-- Header -->
 	<%@ include file="/headerJSP.jsp"%>
 	<%
-		GenericDAO<StudCurs> genDao = new StudCursDAO();
-
-		StudCurs studCursObject = new StudCurs();
+		GenericService<StudCursModel, StudCurs> genService = new StudCursService();
 		String idStudCursString = request.getParameter("id");
 		Integer idStudCurs = Integer.parseInt(idStudCursString);
-		genDao.delete(idStudCurs);
+		genService.delete(idStudCurs);
 	%>
 	<a href="<%=request.getContextPath()%>/StudCurs/StudCurs.jsp">Click
 		here: <strong>StudCurs Curs</strong>

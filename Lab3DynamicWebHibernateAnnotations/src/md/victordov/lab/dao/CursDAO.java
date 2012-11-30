@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -135,16 +136,16 @@ public class CursDAO implements Serializable, GenericDAO<Curs> {
 		session = HibernateUtil.getSessionFactory().openSession();
 		Transaction tx = session.beginTransaction();
 
-		Criteria crit = session.createCriteria(Curs.class);
+		Query q = session.createQuery("from Curs as c");
 		int pageIndex = start;
 		int numberOfRecordsPerPage = maxRecords;
 		int s;
 		s = (pageIndex * numberOfRecordsPerPage) - numberOfRecordsPerPage;
-		crit.setFirstResult(s);
-		crit.setMaxResults(numberOfRecordsPerPage);
+		q.setFirstResult(s);
+		q.setMaxResults(numberOfRecordsPerPage);
 		List<Curs> list = null;
 		try {
-			list = (List<Curs>) (List<Curs>) crit.list();
+			list = (List<Curs>) (List<Curs>) q.list();
 			tx.commit();
 		} catch (HibernateException he) {
 			if (tx != null)

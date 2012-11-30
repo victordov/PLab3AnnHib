@@ -58,7 +58,7 @@ public class Curs implements java.io.Serializable {
 		this.CId = CId;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "u_id", nullable = false)
 	public Universitate getUniversitate() {
 		return this.universitate;
@@ -68,7 +68,7 @@ public class Curs implements java.io.Serializable {
 		this.universitate = universitate;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "p_id", nullable = false)
 	public Profesor getProfesor() {
 		return this.profesor;
@@ -87,7 +87,7 @@ public class Curs implements java.io.Serializable {
 		this.numeCurs = numeCurs;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "curs")
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "curs")
 	public Set<StudCurs> getStudCurses() {
 		return this.studCurses;
 	}

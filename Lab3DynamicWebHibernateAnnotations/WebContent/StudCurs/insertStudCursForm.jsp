@@ -2,8 +2,9 @@
 	pageEncoding="ISO-8859-1"%>
 <%@ page import="md.*"%>
 <%@ page import="md.victordov.lab.vo.*"%>
-<%@ page import="md.victordov.lab.dao.StudentDAO"%>
-<%@ page import="md.victordov.lab.vo.StudCurs"%>
+<%@ page import="md.victordov.lab.services.GenericService"%>
+<%@ page import="md.victordov.lab.services.StudCursService"%>
+<%@ page import="md.victordov.lab.view.model.StudCursModel"%>
 <%@ page import="java.io.PrintWriter"%>
 <%@ page import="java.util.List"%>
 <%@ page import="md.victordov.lab.dao.*"%>
@@ -12,30 +13,28 @@
 <%
 	/**
 	 *@author Victor Dovgaliuc
-	 *insert StudCurs page will inser the StudCurs record using anotation and take into consideration the relationship between tables
+	 *insert StudCursModel page will inser the StudCursModel record using anotation and take into consideration the relationship between tables
 	 */
 %>
 <html>
 <head>
 <link href="<%=request.getContextPath()%>/style.css" rel="stylesheet"
 	type="text/css">
-<title>StudCurs Edit</title>
+<title>StudCursModel Edit</title>
 </head>
 <body>
 	<%@ include file="/headerJSP.jsp"%>
 	<br />
 	<br />
 	<form method="post"
-		action="<%=request.getContextPath()%>/StudCurs/insertStudCursForm.jsp">
+		action="<%=request.getContextPath()%>/StudCursModel/insertStudCursForm.jsp">
 		<%
-			GenericDAO<StudCurs> genDao = new StudCursDAO();
+			GenericService<StudCursModel, StudCurs> genService = new StudCursService();
 
-			StudCurs studCursObject = new StudCurs();
-			List<StudCurs> listStudCurs;
-			listStudCurs = genDao.retrieve();
+			StudCursModel studCursModel = new StudCursModel();
 		%>
 		<table>
-			<caption>StudCurs Insert</caption>
+			<caption>StudCursModel Insert</caption>
 			<tr>
 				<th>Student ID</th>
 				<th>Curs ID</th>
@@ -62,21 +61,15 @@
 			String studentIdString = request.getParameter("StudID");
 			Integer studentID = Integer.parseInt(studentIdString);
 			String cursIdString = request.getParameter("CursID");
-			Integer cursID = Integer.parseInt(cursIdString);
+			Integer cursId = Integer.parseInt(cursIdString);
 
-			Student student = new Student();
-			student.setSId(studentID);
-
-			Curs curs = new Curs();
-			curs.setCId(cursID);
-
-			studCursObject.setStudent(student);
-			studCursObject.setCurs(curs);
-			genDao.create(studCursObject);
+			studCursModel.setStudentId(studentID);
+			studCursModel.setCursId(cursId);
+			genService.create(studCursModel);
 		}
 	%>
 	Click here:
-	<a href="<%=request.getContextPath()%>/StudCurs/StudCurs.jsp"><strong>Student
+	<a href="<%=request.getContextPath()%>/StudCursModel/StudCursModel.jsp"><strong>Student
 			Curs</strong> </a>
 
 	<!-- Footer -->

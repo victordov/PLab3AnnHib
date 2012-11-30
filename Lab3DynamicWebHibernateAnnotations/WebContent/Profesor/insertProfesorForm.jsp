@@ -2,8 +2,10 @@
 	pageEncoding="ISO-8859-1"%>
 <%@ page import="md.*"%>
 <%@ page import="md.victordov.lab.vo.*"%>
-<%@ page import="md.victordov.lab.dao.ProfesorDAO"%>
+<%@ page import="md.victordov.lab.services.ProfesorService"%>
+<%@ page import="md.victordov.lab.services.GenericService"%>
 <%@ page import="md.victordov.lab.vo.Profesor"%>
+<%@ page import="md.victordov.lab.view.model.ProfesorModel"%>
 <%@ page import="java.io.PrintWriter"%>
 <%@ page import="java.util.List"%>
 <%@ page import="md.victordov.lab.dao.*"%>
@@ -22,10 +24,10 @@
 	<br />
 	<form method="post" action="insertProfesorForm.jsp">
 		<%
-			GenericDAO<Profesor> genDao = new ProfesorDAO();
-			Profesor prof = new Profesor();
-			List<Profesor> listProf;
-			listProf = genDao.retrieve();
+			GenericService<ProfesorModel, Profesor> genService = new ProfesorService();
+			ProfesorModel profModel = new ProfesorModel();
+			List<ProfesorModel> profModelList;
+			profModelList = genService.retrieve();
 		%>
 		<table>
 			<caption>Profesor Insert</caption>
@@ -57,10 +59,10 @@
 			String prenumeProfesor = request.getParameter("Prenume");
 			String adresaProfesor = request.getParameter("Adresa");
 
-			prof.setNume(numeProfesor);
-			prof.setPrenume(prenumeProfesor);
-			prof.setAdresa(adresaProfesor);
-			genDao.create(prof);
+			profModel.setNume(numeProfesor);
+			profModel.setPrenume(prenumeProfesor);
+			profModel.setAdresa(adresaProfesor);
+			genService.create(profModel);
 
 		}
 	%>

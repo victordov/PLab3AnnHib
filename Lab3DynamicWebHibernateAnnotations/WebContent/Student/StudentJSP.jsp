@@ -2,8 +2,9 @@
 	pageEncoding="ISO-8859-1"%>
 <%@ page import="md.*"%>
 <%@ page import="md.victordov.lab.vo.*"%>
-<%@ page import="md.victordov.lab.dao.StudentDAO"%>
-<%@ page import="md.victordov.lab.vo.Student"%>
+<%@ page import="md.victordov.lab.services.GenericService"%>
+<%@ page import="md.victordov.lab.services.StudentService"%>
+<%@ page import="md.victordov.lab.view.model.StudentModel"%>
 <%@ page import="java.io.PrintWriter"%>
 <%@ page import="java.util.List"%>
 <%@ page import="md.victordov.lab.dao.*"%>
@@ -54,9 +55,9 @@ function deleteRecord(id){
 		} catch (Exception e) {
 			pageNr = 1;
 		}
-		GenericDAO<Student> genDao = new StudentDAO();
-		List<Student> studList;
-		studList = genDao.retrieve(pageNr, pageSize);
+		GenericService<StudentModel, Student> genService = new StudentService();
+		List<StudentModel> studModelList;
+		studModelList = genService.retrieve(pageNr, pageSize);
 	%>
 	<br />
 	<br />
@@ -78,23 +79,23 @@ function deleteRecord(id){
 			</thead>
 			<%
 				int studListSize = 0;
-				studListSize = genDao.countSize().intValue();
+				studListSize = genService.countSize().intValue();
 				int ox = (pageNr * pageSize) - pageSize;
-				for (int i = 0; (i < pageSize) && (i < studList.size()); i++) {
+				for (int i = 0; (i < pageSize) && (i < studModelList.size()); i++) {
 			%>
 			<tr>
-				<td><%=studList.get(i).getSId()%></td>
-				<td><%=studList.get(i).getNume()%></td>
-				<td><%=studList.get(i).getPrenume()%></td>
-				<td><%=studList.get(i).getGrupa()%></td>
-				<td><%=studList.get(i).getEmail()%></td>
-				<td><%=studList.get(i).getTelFix()%></td>
+				<td><%=studModelList.get(i).getSId()%></td>
+				<td><%=studModelList.get(i).getNume()%></td>
+				<td><%=studModelList.get(i).getPrenume()%></td>
+				<td><%=studModelList.get(i).getGrupa()%></td>
+				<td><%=studModelList.get(i).getEmail()%></td>
+				<td><%=studModelList.get(i).getTelFix()%></td>
 				<td><input type="button" name="edit" value="Edit"
 					style="background-color: green; font-weight: bold; color: white;"
-					onclick="editRecord(<%=studList.get(i).getSId()%>);"></td>
+					onclick="editRecord(<%=studModelList.get(i).getSId()%>);"></td>
 				<td><input type="button" name="delete" value="Delete"
 					style="background-color: red; font-weight: bold; color: white;"
-					onclick="deleteRecord(<%=studList.get(i).getSId()%>);"></td>
+					onclick="deleteRecord(<%=studModelList.get(i).getSId()%>);"></td>
 			</tr>
 			<%
 				}
@@ -103,7 +104,7 @@ function deleteRecord(id){
 				<td align="right" colspan="8">
 					<%
 						out.print("<td rowspan = \"2"
-								+ studList.size()
+								+ studModelList.size()
 								+ "\"><a href=\""
 								+ request.getContextPath()
 								+ "/Student/insertStudentForm.jsp\"><input type=\"button\" name=\"insert\"");

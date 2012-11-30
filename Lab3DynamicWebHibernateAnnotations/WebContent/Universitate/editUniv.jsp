@@ -2,11 +2,11 @@
 	pageEncoding="ISO-8859-1"%>
 <%@ page import="md.*"%>
 <%@ page import="md.victordov.lab.vo.*"%>
-<%@ page import="md.victordov.lab.dao.UnivDAO"%>
-<%@ page import="md.victordov.lab.vo.Universitate"%>
+<%@ page import="md.victordov.lab.services.GenericService"%>
+<%@ page import="md.victordov.lab.services.UniversitateService"%>
+<%@ page import="md.victordov.lab.view.model.UniversitateModel"%>
 <%@ page import="java.io.PrintWriter"%>
 <%@ page import="java.util.List"%>
-<%@ page import="md.victordov.lab.dao.*"%>
 <!DOCTYPE html>
 <!-- Edit Universitate is a jsp page that edits the record of the Universitate table
 in case that the user will try to access the page through the get method a black page will be displayed -->
@@ -26,11 +26,11 @@ in case that the user will try to access the page through the get method a black
 	%>
 	<form method="post" action="editUniv.jsp">
 		<%
-			GenericDAO<Universitate> genDao = new UnivDAO();
-				Universitate univ = new Universitate();
+			GenericService<UniversitateModel, Universitate> genService = new UniversitateService();
+				UniversitateModel univModel = new UniversitateModel();
 				String id = request.getParameter("idUniversitate");
 				Integer no = Integer.parseInt(id);
-				univ = genDao.retrieve(no);
+				univModel = genService.retrieve(no);
 		%>
 		<table>
 			<tr>
@@ -40,11 +40,11 @@ in case that the user will try to access the page through the get method a black
 			</tr>
 			<tr>
 				<td><input type="text" name="Denumire"
-					value="<%=univ.getNumeUniver()%>"></td>
+					value="<%=univModel.getNumeUniver()%>"></td>
 				<td><input type="text" name="Adresa"
-					value="<%=univ.getAdresa()%>"></td>
+					value="<%=univModel.getAdresa()%>"></td>
 				<td><input type="text" name="Telefon"
-					value="<%=univ.getTelefon()%>"></td>
+					value="<%=univModel.getTelefon()%>"></td>
 				<td><input type="hidden" name="idUniversitate" value="<%=no%>"></td>
 			</tr>
 			<tr>
@@ -55,7 +55,7 @@ in case that the user will try to access the page through the get method a black
 		</table>
 	</form>
 
-<!-- All fields are checked if not null to avoid black data to be inserted in the table Unviersitate -->
+	<!-- All fields are checked if not null to avoid black data to be inserted in the table Unviersitate -->
 	<%
 		if ("POST".equalsIgnoreCase(request.getMethod())
 					&& request.getParameter("idUniversitate") != null
@@ -70,11 +70,11 @@ in case that the user will try to access the page through the get method a black
 				String adresaUniver = request.getParameter("Adresa");
 				String telefonUniver = request.getParameter("Telefon");
 
-				univ.setUId(idUniversitate);
-				univ.setNumeUniver(denumUniver);
-				univ.setAdresa(adresaUniver);
-				univ.setTelefon(telefonUniver);
-				genDao.update(univ);
+				univModel.setUId(idUniversitate);
+				univModel.setNumeUniver(denumUniver);
+				univModel.setAdresa(adresaUniver);
+				univModel.setTelefon(telefonUniver);
+				genService.update(univModel);
 			}
 		}
 	%>

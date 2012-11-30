@@ -1,12 +1,17 @@
+<%@page import="md.victordov.lab.common.exception.MyDaoException"%>
+<%@page import="md.victordov.lab.common.exception.ErrorList"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@ page import="md.*"%>
 <%@ page import="md.victordov.lab.vo.*"%>
 <%@ page import="md.victordov.lab.dao.CursDAO"%>
-<%@ page import="md.victordov.lab.vo.Universitate"%>
 <%@ page import="java.io.PrintWriter"%>
 <%@ page import="java.util.List"%>
 <%@ page import="md.victordov.lab.dao.*"%>
+<%@ page import="md.victordov.lab.common.exception.MyDaoException"%>
+<%@ page import="md.victordov.lab.services.GenericService"%>
+<%@ page import="md.victordov.lab.services.CursService"%>
+<%@ page import="md.victordov.lab.view.model.CursModel"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,11 +25,9 @@
 	<%@ include file="/headerJSP.jsp"%>
 
 	<%
-		GenericDAO<Curs> genDao = new CursDAO();
-		Curs curs = new Curs();
+		GenericService<CursModel, Curs> gs = new CursService();
 		String idCursString = request.getParameter("id");
-		Integer idCurs = Integer.parseInt(idCursString);
-		genDao.delete(idCurs);
+		gs.delete(Integer.parseInt(idCursString));
 	%>
 	<p>Curs was deleted</p>
 
