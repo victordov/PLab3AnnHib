@@ -17,13 +17,7 @@ import javax.persistence.Table;
 @Table(name = "stud_curs", catalog = "uni2_4t")
 public class StudCurs implements java.io.Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
-	private Integer scId;
-	private Curs curs;
-	private Student student;
 
 	public StudCurs() {
 	}
@@ -33,9 +27,6 @@ public class StudCurs implements java.io.Serializable {
 		this.student = student;
 	}
 
-	@Id
-	@GeneratedValue(strategy = IDENTITY)
-	@Column(name = "sc_id", unique = true, nullable = false)
 	public Integer getScId() {
 		return this.scId;
 	}
@@ -44,8 +35,6 @@ public class StudCurs implements java.io.Serializable {
 		this.scId = scId;
 	}
 
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "c_id", nullable = false)
 	public Curs getCurs() {
 		return this.curs;
 	}
@@ -54,8 +43,6 @@ public class StudCurs implements java.io.Serializable {
 		this.curs = curs;
 	}
 
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "s_id", nullable = false)
 	public Student getStudent() {
 		return this.student;
 	}
@@ -63,5 +50,18 @@ public class StudCurs implements java.io.Serializable {
 	public void setStudent(Student student) {
 		this.student = student;
 	}
+
+	@Id
+	@GeneratedValue(strategy = IDENTITY)
+	@Column(name = "sc_id", unique = true, nullable = false)
+	private Integer scId;
+
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "c_id", nullable = false)
+	private Curs curs;
+
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "s_id", nullable = false)
+	private Student student;
 
 }

@@ -19,11 +19,6 @@ import javax.persistence.Table;
 public class Profesor implements java.io.Serializable {
 
 	private static final long serialVersionUID = 1L;
-	private Integer PId;
-	private String nume;
-	private String prenume;
-	private String adresa;
-	private Set<Curs> curses = new HashSet<Curs>(0);
 
 	public Profesor() {
 	}
@@ -41,9 +36,6 @@ public class Profesor implements java.io.Serializable {
 		this.curses = curses;
 	}
 
-	@Id
-	@GeneratedValue(strategy = IDENTITY)
-	@Column(name = "p_id", unique = true, nullable = false)
 	public Integer getPId() {
 		return this.PId;
 	}
@@ -52,7 +44,6 @@ public class Profesor implements java.io.Serializable {
 		this.PId = PId;
 	}
 
-	@Column(name = "nume", nullable = false, length = 30)
 	public String getNume() {
 		return this.nume;
 	}
@@ -61,7 +52,6 @@ public class Profesor implements java.io.Serializable {
 		this.nume = nume;
 	}
 
-	@Column(name = "prenume", nullable = false, length = 30)
 	public String getPrenume() {
 		return this.prenume;
 	}
@@ -70,7 +60,6 @@ public class Profesor implements java.io.Serializable {
 		this.prenume = prenume;
 	}
 
-	@Column(name = "adresa", nullable = false, length = 40)
 	public String getAdresa() {
 		return this.adresa;
 	}
@@ -79,7 +68,6 @@ public class Profesor implements java.io.Serializable {
 		this.adresa = adresa;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "profesor")
 	public Set<Curs> getCurses() {
 		return this.curses;
 	}
@@ -87,5 +75,22 @@ public class Profesor implements java.io.Serializable {
 	public void setCurses(Set<Curs> curses) {
 		this.curses = curses;
 	}
+
+	@Id
+	@GeneratedValue(strategy = IDENTITY)
+	@Column(name = "p_id", unique = true, nullable = false)
+	private Integer PId;
+
+	@Column(name = "nume", nullable = false, length = 30)
+	private String nume;
+
+	@Column(name = "prenume", nullable = false, length = 30)
+	private String prenume;
+
+	@Column(name = "adresa", nullable = false, length = 40)
+	private String adresa;
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "profesor")
+	private Set<Curs> curses = new HashSet<Curs>(0);
 
 }

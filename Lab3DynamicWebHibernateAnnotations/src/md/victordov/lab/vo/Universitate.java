@@ -22,11 +22,7 @@ public class Universitate implements java.io.Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private Integer UId;
-	private String numeUniver;
-	private String adresa;
-	private String telefon;
-	private Set<Curs> curses = new HashSet<Curs>(0);
+	
 
 	public Universitate() {
 	}
@@ -45,9 +41,7 @@ public class Universitate implements java.io.Serializable {
 		this.curses = curses;
 	}
 
-	@Id
-	@GeneratedValue(strategy = IDENTITY)
-	@Column(name = "u_id", unique = true, nullable = false)
+	
 	public Integer getUId() {
 		return this.UId;
 	}
@@ -56,7 +50,7 @@ public class Universitate implements java.io.Serializable {
 		this.UId = UId;
 	}
 
-	@Column(name = "nume_univer", nullable = false, length = 30)
+	
 	public String getNumeUniver() {
 		return this.numeUniver;
 	}
@@ -65,7 +59,7 @@ public class Universitate implements java.io.Serializable {
 		this.numeUniver = numeUniver;
 	}
 
-	@Column(name = "adresa", nullable = false, length = 40)
+	
 	public String getAdresa() {
 		return this.adresa;
 	}
@@ -74,7 +68,7 @@ public class Universitate implements java.io.Serializable {
 		this.adresa = adresa;
 	}
 
-	@Column(name = "telefon", nullable = false, length = 30)
+	
 	public String getTelefon() {
 		return this.telefon;
 	}
@@ -83,7 +77,7 @@ public class Universitate implements java.io.Serializable {
 		this.telefon = telefon;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "universitate")
+	
 	public Set<Curs> getCurses() {
 		return this.curses;
 	}
@@ -91,5 +85,21 @@ public class Universitate implements java.io.Serializable {
 	public void setCurses(Set<Curs> curses) {
 		this.curses = curses;
 	}
-
+	
+	@Id
+	@GeneratedValue(strategy = IDENTITY)
+	@Column(name = "u_id", unique = true, nullable = false)
+	private Integer UId;
+	
+	@Column(name = "nume_univer", nullable = false, length = 30)
+	private String numeUniver;
+	
+	@Column(name = "adresa", nullable = false, length = 40)
+	private String adresa;
+	
+	@Column(name = "telefon", nullable = false, length = 30)
+	private String telefon;
+	
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "universitate")
+	private Set<Curs> curses = new HashSet<Curs>(0);
 }

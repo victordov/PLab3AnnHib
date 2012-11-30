@@ -18,17 +18,7 @@ import javax.persistence.Table;
 @Table(name = "student", catalog = "uni2_4t")
 public class Student implements java.io.Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
-	private Integer SId;
-	private String nume;
-	private String prenume;
-	private String grupa;
-	private String email;
-	private String telFix;
-	private Set<StudCurs> studCurses = new HashSet<StudCurs>(0);
 
 	public Student() {
 	}
@@ -52,9 +42,6 @@ public class Student implements java.io.Serializable {
 		this.studCurses = studCurses;
 	}
 
-	@Id
-	@GeneratedValue(strategy = IDENTITY)
-	@Column(name = "s_id", unique = true, nullable = false)
 	public Integer getSId() {
 		return this.SId;
 	}
@@ -63,7 +50,6 @@ public class Student implements java.io.Serializable {
 		this.SId = SId;
 	}
 
-	@Column(name = "nume", nullable = false, length = 30)
 	public String getNume() {
 		return this.nume;
 	}
@@ -72,7 +58,6 @@ public class Student implements java.io.Serializable {
 		this.nume = nume;
 	}
 
-	@Column(name = "prenume", nullable = false, length = 30)
 	public String getPrenume() {
 		return this.prenume;
 	}
@@ -81,7 +66,6 @@ public class Student implements java.io.Serializable {
 		this.prenume = prenume;
 	}
 
-	@Column(name = "grupa", nullable = false, length = 15)
 	public String getGrupa() {
 		return this.grupa;
 	}
@@ -90,7 +74,6 @@ public class Student implements java.io.Serializable {
 		this.grupa = grupa;
 	}
 
-	@Column(name = "email", nullable = false, length = 30)
 	public String getEmail() {
 		return this.email;
 	}
@@ -99,7 +82,6 @@ public class Student implements java.io.Serializable {
 		this.email = email;
 	}
 
-	@Column(name = "telFix", nullable = false, length = 20)
 	public String getTelFix() {
 		return this.telFix;
 	}
@@ -108,7 +90,6 @@ public class Student implements java.io.Serializable {
 		this.telFix = telFix;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "student")
 	public Set<StudCurs> getStudCurses() {
 		return this.studCurses;
 	}
@@ -116,5 +97,28 @@ public class Student implements java.io.Serializable {
 	public void setStudCurses(Set<StudCurs> studCurses) {
 		this.studCurses = studCurses;
 	}
+
+	@Id
+	@GeneratedValue(strategy = IDENTITY)
+	@Column(name = "s_id", unique = true, nullable = false)
+	private Integer SId;
+
+	@Column(name = "nume", nullable = false, length = 30)
+	private String nume;
+
+	@Column(name = "prenume", nullable = false, length = 30)
+	private String prenume;
+
+	@Column(name = "grupa", nullable = false, length = 15)
+	private String grupa;
+
+	@Column(name = "email", nullable = false, length = 30)
+	private String email;
+
+	@Column(name = "telFix", nullable = false, length = 20)
+	private String telFix;
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "student")
+	private Set<StudCurs> studCurses = new HashSet<StudCurs>(0);
 
 }

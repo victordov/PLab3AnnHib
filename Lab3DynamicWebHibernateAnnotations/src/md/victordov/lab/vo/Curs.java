@@ -20,15 +20,7 @@ import javax.persistence.Table;
 @Table(name = "curs", catalog = "uni2_4t")
 public class Curs implements java.io.Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
-	private Integer CId;
-	private Universitate universitate;
-	private Profesor profesor;
-	private String numeCurs;
-	private Set<StudCurs> studCurses = new HashSet<StudCurs>(0);
 
 	public Curs() {
 	}
@@ -47,9 +39,6 @@ public class Curs implements java.io.Serializable {
 		this.studCurses = studCurses;
 	}
 
-	@Id
-	@GeneratedValue(strategy = IDENTITY)
-	@Column(name = "c_id", unique = true, nullable = false)
 	public Integer getCId() {
 		return this.CId;
 	}
@@ -58,8 +47,6 @@ public class Curs implements java.io.Serializable {
 		this.CId = CId;
 	}
 
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "u_id", nullable = false)
 	public Universitate getUniversitate() {
 		return this.universitate;
 	}
@@ -68,8 +55,6 @@ public class Curs implements java.io.Serializable {
 		this.universitate = universitate;
 	}
 
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "p_id", nullable = false)
 	public Profesor getProfesor() {
 		return this.profesor;
 	}
@@ -78,7 +63,6 @@ public class Curs implements java.io.Serializable {
 		this.profesor = profesor;
 	}
 
-	@Column(name = "nume_curs", nullable = false, length = 30)
 	public String getNumeCurs() {
 		return this.numeCurs;
 	}
@@ -87,7 +71,6 @@ public class Curs implements java.io.Serializable {
 		this.numeCurs = numeCurs;
 	}
 
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "curs")
 	public Set<StudCurs> getStudCurses() {
 		return this.studCurses;
 	}
@@ -95,5 +78,24 @@ public class Curs implements java.io.Serializable {
 	public void setStudCurses(Set<StudCurs> studCurses) {
 		this.studCurses = studCurses;
 	}
+
+	@Id
+	@GeneratedValue(strategy = IDENTITY)
+	@Column(name = "c_id", unique = true, nullable = false)
+	private Integer CId;
+
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "u_id", nullable = false)
+	private Universitate universitate;
+
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "p_id", nullable = false)
+	private Profesor profesor;
+
+	@Column(name = "nume_curs", nullable = false, length = 30)
+	private String numeCurs;
+
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "curs")
+	private Set<StudCurs> studCurses = new HashSet<StudCurs>(0);
 
 }
